@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 
-public class Parallaxing : MonoBehaviour
+// Implements the parallax background scrolling effect
+public class Parallax : MonoBehaviour
 {
 
-    public float smoothingSpeed = 1f;  // scrolling smooth speed
+    public float smoothingSpeed = 1f;   // scrolling smooth speed
     public Transform[] backgrounds;     // references to all the backgrounds that will be scrolled
 
     private Transform mainCamera;       // reference to the main cameras transform  

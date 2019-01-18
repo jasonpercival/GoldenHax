@@ -2,9 +2,35 @@ fileFormatVersion: 2
 guid: 0b2495ef758cb9b47b3fe1eaa33007ce
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Background_0
-    21300002: Background_1
-    21300004: Background_2
+    21300000: Eagle_Eye1
+    21300002: Eagle_Eye2
+    21300004: Eagle_Eye3
+    21300006: Turtle_Eye3
+    21300008: Background_9
+    21300010: Background_13
+    21300012: Background_14
+    21300014: Stage4_Layer1
+    21300016: Stage5_Layer1
+    21300018: Pillar1
+    21300020: Background_Layer2
+    21300022: Throne
+    21300024: Background_23
+    21300026: Pillar2
+    21300028: Level_Layer1
+    21300030: Huts_Left
+    21300032: Huts_Right
+    21300034: Bridge
+    21300036: Stage_2_End
+    21300038: Door_Frame
+    21300040: Background_31
+    21300042: Level_Layer2
+    21300044: Stage2_Layer2
+    21300046: Stage3_Layer2
+    21300048: Stage4_Layer2
+    21300050: Stage5_Layer2
+    21300052: Turtle_Eye1
+    21300054: Turtle_Eye2
+    21300056: Background_Layer1
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -48,7 +74,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 20.5
+  spritePixelsToUnits: 20
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -120,33 +146,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Background_0
+      name: Background_Layer1
       rect:
         serializedVersion: 2
-        x: 650
+        x: 649
         y: 1538
-        width: 3230
-        height: 448
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c1911073927c725419cf9f36960457a1
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background_1
-      rect:
-        serializedVersion: 2
-        x: 126
-        y: 1111
-        width: 1536
-        height: 207
+        width: 6395
+        height: 896
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,13 +160,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e09b8584708f7cb4ab2ac2c881510095
+      spriteID: c6e9910253681ab46bd1fcd4966fc9e8
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Background_2
+      name: Background_Layer2
       rect:
         serializedVersion: 2
         x: 126
@@ -174,7 +180,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 16c609e935d913e48bc99a36aeb8eb43
+      spriteID: a593cc84385850142aec1fbbbe4bc897
       vertices: []
       indices: 
       edges: []
