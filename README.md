@@ -4,5 +4,4 @@ This project is a re-creation of SEGA’s classic arcade game Golden Axe in Unit
 
 [View Progress Updates](https://github.com/jasonpercival/GoldenHax/wiki/Golden-Hax)
 
-[![The Cinema](http://img.youtube.com/vi/rTBiYlStxrA/0.jpg)](http://www.youtube.com/watch?v=rTBiYlStxrA)
-
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=rTBiYlStxrA" target="_blank"><img src="http://img.youtube.com/vi/rTBiYlStxrA/0.jpg" width="240" height="180" border="10" /></a>
