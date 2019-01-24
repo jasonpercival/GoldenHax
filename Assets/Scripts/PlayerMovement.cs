@@ -2,44 +2,46 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
+    // default speed values
     public float horizontalSpeed = 5.0f;
-    public float verticalSpeed = 1.0f;
+    public float verticalSpeed = 3.0f;
 
+    // references to components
     private Animator animator;
-    private SpriteRenderer sr;
+    private SpriteRenderer sr; 
+    private Rigidbody2D rb;
+
     private float horizontalMovement = 0.0f;
     private float verticalMovement = 0.0f;
-    private bool FacingLeft = false;            // previous direction player is facing
+    private bool facingLeft = false;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
+
+        rb.gravityScale = 0.0f;
+        rb.sleepMode = RigidbodySleepMode2D.NeverSleep;
+        rb.freezeRotation = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
+        // read keyboard/controller input for movement
         horizontalMovement = Input.GetAxisRaw("Horizontal");
         verticalMovement = Input.GetAxisRaw("Vertical");
 
-        // flip the player sprite if facing left
-        if (horizontalMovement > 0)
+        // flip the player sprite if facing to the left
+        if (horizontalMovement != 0)
         {
-            FacingLeft = false;
-        }
-        else if (horizontalMovement < 0)
-        {
-            FacingLeft = true;
+            facingLeft = (horizontalMovement < 0);
+            sr.flipX = facingLeft;
         }
 
-        sr.flipX = FacingLeft;
-    }
-
-    private void FixedUpdate()
-    {
         // pass movement values to animator to handle animation transitions
         if (animator)
         {
@@ -47,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("verticalMovement", verticalMovement);
         }
 
-        // move the player by the desired speed horizontally and vertically
-        transform.Translate(horizontalMovement * horizontalSpeed * Time.fixedDeltaTime, verticalMovement * verticalSpeed * Time.fixedDeltaTime, 0);
+        // update the player's position
+        rb.velocity = new Vector2(horizontalMovement * horizontalSpeed, verticalMovement * verticalSpeed);
     }
 }
