@@ -1,0 +1,20 @@
+Prefabs
+
+[ ] Necessary prefabs created with reusability in mind: Collectibles (Magic Potion, Food Collectible), Player, Enemy
+[ ] What game objects are going to be needed thoughout the level
+
+Complete the mechanics for the Character
+
+[ ] Secondary Attack – Triggered by pressing “Fire2”   		(Use Magic Potions)
+[ ] Death – Health is 0										(Death)
+[ ] Hit – Hit by an object that does not result in death	(Take Damage)
+[ ] Power-up – Plays a power-up animation					(Jump+Slash Attack)
+
+Complete the animations for each mechanic
+
+[ ] Secondary Attack (Cast Magic)
+[ ] Death
+[ ] Hit
+[ ] Power-up (Jump+Slash Attack instead) 
+
+

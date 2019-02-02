@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - Collectible
   layers:
   - Default
   - TransparentFX
@@ -46,9 +48,6 @@ TagManager:
     locked: 0
   - name: Midground
     uniqueID: 2957913753
-    locked: 0
-  - name: Player
-    uniqueID: 2378237555
     locked: 0
   - name: Foreground
     uniqueID: 4031718273

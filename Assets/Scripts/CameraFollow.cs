@@ -7,16 +7,23 @@ public class CameraFollow : MonoBehaviour
     public Transform player;
     private Vector3 cameraOffset;
 
+    Animator anim;
+
     void Start()
     {
         if (!player)
         {
             // get tranform of player character
-            player = GameObject.Find("Player_Warrior").GetComponent<Transform>();
+            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         }
 
         // get offset of camera from players position
         cameraOffset = transform.position - player.transform.position;
+
+        if (!anim)
+        {
+            anim = GetComponent<Animator>();
+        }
     }
 
     // Update is called once per frame
