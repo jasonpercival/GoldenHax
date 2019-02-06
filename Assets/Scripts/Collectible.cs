@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ public class Collectible : MonoBehaviour
 {
     public int healthBonus = 0;
     public int potionBonus = 0;
+    public AudioClip collectItemClip;    
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -13,13 +15,22 @@ public class Collectible : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             // Get the players character script component
-            var character = collision.GetComponent<Character>();
+            Character character = collision.GetComponent<Character>();
             if (!character)
             {
                 Debug.LogWarning("Unable to get player character script component on " + name);
             }
             else
             {
+
+                AudioSource audioSource = collision.GetComponent<AudioSource>();
+                if (audioSource && collectItemClip)
+                {
+                    audioSource.PlayOneShot(collectItemClip);
+                }
+
+                character.PickupItem();
+
                 // If this is a food collectible increment the player health bar
                 if (healthBonus > 0)
                 {

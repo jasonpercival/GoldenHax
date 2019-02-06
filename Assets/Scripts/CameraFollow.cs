@@ -4,39 +4,31 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public Transform player;
-    private Vector3 cameraOffset;
+    public float smoothX;
+    public float smoothY;
+    public GameObject player;
+    public Vector3 minCameraPos;
+    public Vector3 maxCameraPos;
 
-    Animator anim;
+    private Vector2 velocity;
 
     void Start()
     {
         if (!player)
         {
-            // get tranform of player character
-            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        }
-
-        // get offset of camera from players position
-        cameraOffset = transform.position - player.transform.position;
-
-        if (!anim)
-        {
-            anim = GetComponent<Animator>();
+            // get transform of player character
+            player = GameObject.Find("Player");
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void LateUpdate()
     {
-        // determine the new camera position
-        Vector3 targetPosition = player.transform.position + cameraOffset;
+        float posX = Mathf.SmoothDamp(transform.position.x, player.transform.position.x, ref velocity.x, smoothX);
+        float posY = Mathf.SmoothDamp(transform.position.y, player.transform.position.y, ref velocity.y, smoothY);
 
-        // freeze the Y position of the camera
-        targetPosition.y = transform.position.y;
-
-        // update camera's position to follow the player
-        transform.position = targetPosition;
-
+        transform.position = new Vector3(
+            Mathf.Clamp(posX, minCameraPos.x, maxCameraPos.x),
+            Mathf.Clamp(posY, minCameraPos.y, maxCameraPos.y),
+            transform.position.z);
     }
 }

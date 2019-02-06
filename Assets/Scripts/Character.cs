@@ -6,39 +6,42 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Character : MonoBehaviour
 {
-    // default speed values
+    // configurable speed values
     public float horizontalSpeed = 5.0f;
     public float verticalSpeed = 3.0f;
     public float jumpForce = 10.0f;
 
+    // game state
     public int maxHealth = 6;
     public int currentHealth = 6;
-
-    public int maxPotions;
+    public int maxPotions = 6;
     public int currentPotions = 1;
+    public bool isDead = false;
+    public bool isHit = false;
 
-
-
-    // references to components
+    // references to other components
     private Animator animator;
     private SpriteRenderer sr;
     private Rigidbody2D rb;
     private BoxCollider2D playerCollider;
+    private EdgeCollider2D worldCollider;
     private AudioSource audioSource;
+
+    // Sound FX
     public AudioClip attackClip;
+    public AudioClip deathClip;
+    public AudioClip damageClip;
 
     // runtime state variables
     private float horizontalMovement = 0.0f;
     private float verticalMovement = 0.0f;
     private bool facingRight = true;
-
     private bool isJumping = false;
-    private Vector3 jumpPosition;         // original Y position before jump started
+    private Vector3 jumpPosition;       // original Y position before jump started
 
     // attacking state
-    private bool isAttacking = false;
-    private float attackSpeed = 0.3f;   // attack rate speed limit 
-    private float nextAttack;           // next time attack is allowed
+    private bool isAttacking = false;   
+    private float attackSpeed = 0.5f;   // attack rate speed limit 
 
     private void Start()
     {
@@ -69,71 +72,77 @@ public class Character : MonoBehaviour
             Debug.LogError("BoxCollider2D not found on " + name);
         }
 
-
+        worldCollider = GameObject.Find("Boundary").GetComponentInChildren<EdgeCollider2D>();
+        if (!worldCollider)
+        {
+            Debug.LogError("World Edge Collider not found in " + name);
+        }
+        
         audioSource = GetComponent<AudioSource>();
         if (!audioSource)
         {
             Debug.LogError("AudioSource not found on " + name);
         }
 
-
         rb.gravityScale = 0.0f;
         rb.sleepMode = RigidbodySleepMode2D.NeverSleep;
         rb.freezeRotation = true;
-        nextAttack = Time.time;
     }
 
     void Update()
-    {
-
-        // Adjust sorting order to make sure player is in front/behind other objects based on current y position
-        sr.sortingOrder = Mathf.RoundToInt(transform.position.y * 100f) * -1;
-
-        // read keyboard/controller input for movement
-        horizontalMovement = Input.GetAxisRaw("Horizontal");
-        verticalMovement = Input.GetAxisRaw("Vertical");
-
-        // Attack
-        if (!isAttacking && Input.GetButtonDown("Fire1") && nextAttack < Time.time)
+    {      
+        // Adjust sprite sorting order to ensure player is in front/behind other objects based on the current y position
+        if (!isJumping)
         {
-            isAttacking = true;
-            animator.SetTrigger("attack");
-            Debug.Log("Attack Start");
-            nextAttack = Time.time + attackSpeed;
-
+            sr.sortingOrder = Mathf.RoundToInt(transform.position.y * 100f) * -1;
         }
 
-        // prevent movement while attacking
-        if (isAttacking)
+        // Prevent movement while attacking
+        if (isAttacking || isDead || isHit)
         {
             horizontalMovement = 0.0f;
             verticalMovement = 0.0f;
         }
-
-        // Magic 
-        if (Input.GetButtonDown("Fire2"))
+        else
         {
-            Magic();
+            // Read keyboard/controller input for movement
+            horizontalMovement = Input.GetAxisRaw("Horizontal");
+            verticalMovement = Input.GetAxisRaw("Vertical");
         }
 
-        // Jump
-        if (Input.GetButtonDown("Jump") && !isJumping)
+        if (!isAttacking && !isHit)
         {
-            Jump();
+            // Jump
+            if (Input.GetButtonDown("Jump") && !isJumping)
+            {
+                Jump();
+            }
+
+            // Attack
+            if (Input.GetButtonDown("Fire1"))
+            {
+                Attack();
+            }
+
+            // Cast Magic 
+            if (Input.GetButtonDown("Fire2") && !isJumping)
+            {
+                Magic();
+            }
         }
 
-        // flip the player sprite if facing to the left/right
+        // Flip the player sprite if facing to the left/right
         if ((facingRight && horizontalMovement < 0) || (!facingRight && horizontalMovement > 0))
         {
             sr.flipX = facingRight;
             facingRight = !facingRight;
         }
 
-        // pass movement values to animator to handle animation transitions
+        // Pass movement values to animator to handle animation transitions
         if (animator)
         {
-            animator.SetFloat("horizontalMovement", Mathf.Abs(horizontalMovement));
-            animator.SetFloat("verticalMovement", verticalMovement);
+            animator.SetFloat("HorizontalMovement", Mathf.Abs(horizontalMovement));
+            animator.SetFloat("VerticalMovement", verticalMovement);
         }
 
         // update the player's position
@@ -141,62 +150,139 @@ public class Character : MonoBehaviour
         {
             rb.velocity = new Vector2(horizontalMovement * horizontalSpeed, verticalMovement * verticalSpeed);
         }
-        //else
-        //{
-        //    rb.velocity = new Vector2(horizontalMovement * horizontalSpeed * 0.75f, rb.velocity.y);
-        //    // check if the player returned to the original ground position after jumping and reset player
-        //    if (transform.position.y < jumpPosition.y)
-        //    {
+        else
+        {
+            rb.velocity = new Vector2(horizontalMovement * horizontalSpeed * 0.75f, rb.velocity.y);
 
-        //        isJumping = false;
-        //        Vector3 position = transform.position;
-        //        position.y = jumpPosition.y;
-        //        transform.position = position;
-        //        rb.gravityScale = 0.0f;
-        //        animator.SetBool("jumping", isJumping);
-        //        playerCollider.enabled = true;
-        //    }
-        //}
+            // don't allow player to fall below their original vertical position
+            if (transform.position.y < jumpPosition.y || rb.velocity.y == 0.0f)
+            {
+                isJumping = false;
+                rb.gravityScale = 0.0f;
+                animator.SetBool("IsJumping", false);
+                Physics2D.IgnoreCollision(playerCollider, worldCollider, false);
+            }
+        }
 
+        // Check for death
+        if (currentHealth < 1 && !isDead)
+        {
+            Death();
+        }
 
+    }
+
+    // Resets to idle state after attack is finished
+    IEnumerator ResetAttack()
+    {
+        yield return new WaitForSeconds(attackSpeed);
+        isAttacking = false;
     }
 
     // Attack animation event handler mid-slash
     private void Attack()
     {
-        Debug.Log("Attack Stop");
+        isAttacking = true;
+        StartCoroutine(ResetAttack());
+        animator.SetTrigger("Attack");
 
         // Play sword attack sound
         audioSource.PlayOneShot(attackClip);
 
-        // TODO: check for enemy collision
-        isAttacking = false;
+        // TODO: check for enemy collisions and apply damage
     }
 
     private void Magic()
     {
-        Debug.Log("Use Magic Potion");
+        isAttacking = true;
+        StartCoroutine(ResetAttack());
+        animator.SetTrigger("Casting");
     }
 
     private void Jump()
     {
-        Debug.Log("Jump");
-        //// save original position of player before jump
-        //jumpPosition = transform.position;
-        //verticalMovement = 0.0f;
+        // save original position of player before jump
+        isJumping = true;
+        jumpPosition = transform.position;
 
-        //// Applies a force in UP direction
-        //isJumping = true;
-        //rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-        //animator.SetBool("jumping", isJumping);
+        // turn gravity back on
+        rb.gravityScale = 1.7f;
+        
+        // Applies a force in UP direction
+        animator.SetBool("IsJumping", true);
+        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
 
-        //// turn gravity back on
-        //rb.gravityScale = 1.7f;
+        Physics2D.IgnoreCollision(playerCollider, worldCollider, true);
+    }
 
-        //// turn off collider while jumping
-        //playerCollider.enabled = false;
+    // Death animation
+    public void Death()
+    {
+        // Play death sound clip
+        if (deathClip)
+        {
+            audioSource.PlayOneShot(deathClip);
+        }
 
+        // Start death animation
+        isDead = true;
+        currentHealth = 0;
+        animator.SetBool("IsDead", isDead);
+        StartCoroutine(FlashPlayer(10.0f));
+
+        // Respawn the player
+        StartCoroutine(Respawn());
+    }
+
+    public void TakeDamage()
+    {
+        isHit = true;
+        animator.SetTrigger("Damage");
+
+        if (damageClip)
+        {
+            audioSource.PlayOneShot(damageClip);
+        }
+
+        currentHealth--;
+        if (currentHealth < 0)
+        {
+            Death();
+        }
+    }
+
+    public void TakeDamageComplete()
+    {
+        isHit = false;
+        Debug.Log("Hit complete!");
     }
 
 
+    // Respawns the player after death after a timeout
+    IEnumerator Respawn()
+    {
+        yield return new WaitForSeconds(5.0f);
+        isDead = false;
+        isHit = false;
+        currentHealth = maxHealth;
+        animator.SetBool("IsDead", isDead);
+     }
+
+    // Feedback to player when item picked up
+    public void PickupItem()
+    {
+        StartCoroutine(FlashPlayer());
+    }
+
+    // Make the player sprite flash temporarily
+    IEnumerator FlashPlayer(float duration = 5.0f)
+    {
+        for (int i = 0; i < duration; i++)
+        {
+            sr.color = Color.gray;
+            yield return new WaitForSeconds(0.05f);
+            sr.color = Color.white;
+            yield return new WaitForSeconds(0.05f);
+        }
+    }
 }

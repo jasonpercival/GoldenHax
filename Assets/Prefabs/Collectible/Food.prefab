@@ -67,7 +67,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1916729741
+  m_SortingLayerID: -263249023
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300030, guid: 8a7fbe7b6eb85ea4a8a6010fba454e7d, type: 3}
@@ -121,3 +121,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBonus: 1
   potionBonus: 0
+  collectItemClip: {fileID: 8300000, guid: 1a15973a4f73d6947a9a0ca87599b254, type: 3}

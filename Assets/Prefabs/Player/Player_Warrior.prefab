@@ -1,5 +1,62 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &462714541456944724
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8266151252814826224}
+  - component: {fileID: 2829094788848959551}
+  m_Layer: 0
+  m_Name: Hitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8266151252814826224
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 462714541456944724}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6435307305738976327}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &2829094788848959551
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 462714541456944724}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &6435307305738976329
 GameObject:
   m_ObjectHideFlags: 0
@@ -32,7 +89,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 8266151252814826224}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -169,7 +227,7 @@ SpriteRenderer:
   m_SortingLayerID: -263249023
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300002, guid: e62475b16dc293148b7cfe0c0966c8d6, type: 3}
+  m_Sprite: {fileID: 21300010, guid: e62475b16dc293148b7cfe0c0966c8d6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -215,8 +273,8 @@ BoxCollider2D:
   m_Offset: {x: 0, y: -1.5772073}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.51389617, y: 0.51402694}
-    oldSize: {x: 2.047619, y: 3.3809524}
+    pivot: {x: 0.53112185, y: 0.49}
+    oldSize: {x: 1.5238096, y: 3.8095238}
     newSize: {x: 0.28, y: 0.61}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -265,4 +323,8 @@ MonoBehaviour:
   currentHealth: 6
   maxPotions: 6
   currentPotions: 1
-  attackClip: {fileID: 0}
+  isDead: 0
+  isHit: 0
+  attackClip: {fileID: 8300000, guid: 7ae192f41792d404796ee61ef35bb9a8, type: 3}
+  deathClip: {fileID: 8300000, guid: 2e7f49f0451b11a49b0ccd9d61e7f142, type: 3}
+  damageClip: {fileID: 8300000, guid: 86a149de2debd02459fd5bad05bc493d, type: 3}
