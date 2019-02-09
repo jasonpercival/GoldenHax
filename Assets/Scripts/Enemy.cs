@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     private SpriteRenderer sr;
     private bool isAttacking = false;
     private Animator anim;
-    private Character target;
+    private Player target;
 
     // Start is called before the first frame update
     void Start()
@@ -19,21 +19,19 @@ public class Enemy : MonoBehaviour
         {
             Debug.LogWarning("Animator not found on " + name);
         }
+        if (!sr)
+        {
+            Debug.LogWarning("Animator not found on " + name);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        sr.sortingOrder = Mathf.RoundToInt(transform.position.y * 100f) * -1;
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerStay(Collider other)
     {
         if (anim)
         {
-            if (collision.tag == "Player" && !isAttacking)
+            if (other.tag == "Player" && !isAttacking)
             {
-                target = collision.GetComponent<Character>();
+                target = other.GetComponent<Player>();
                 if (target && !target.isDead)
                 {
                     isAttacking = true;
@@ -43,9 +41,9 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit(Collider other)
     {
-        if (collision.tag == "Player" && isAttacking)
+        if (other.tag == "Player" && isAttacking)
         {
             target = null;
         }
