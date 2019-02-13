@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1565274083070539694}
   - component: {fileID: 1565274083070539695}
-  - component: {fileID: 2038219926}
   - component: {fileID: 3793924162901102661}
-  - component: {fileID: 1048209865496805149}
+  - component: {fileID: 2038219926}
+  - component: {fileID: 2085583701}
   m_Layer: 0
   m_Name: Longmoan
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -82,18 +82,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2038219926
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1565274083070539664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9928ee6461dfd74fbc050d16d955a30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &3793924162901102661
 Animator:
   serializedVersion: 3
@@ -113,7 +101,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!65 &1048209865496805149
+--- !u!114 &2038219926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1565274083070539664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9928ee6461dfd74fbc050d16d955a30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 6
+  speed: 1
+--- !u!65 &2085583701
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

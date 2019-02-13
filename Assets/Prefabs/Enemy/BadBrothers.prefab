@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 3151762803780808546}
   - component: {fileID: 3151762803780808549}
   - component: {fileID: 1867783763230026340}
+  - component: {fileID: 3151762803780808548}
   m_Layer: 0
   m_Name: BadBrothers
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -92,3 +93,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9928ee6461dfd74fbc050d16d955a30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &3151762803780808548
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3151762803780808547}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2b84297ec1fc7f14cbddc5bbf6221c96, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

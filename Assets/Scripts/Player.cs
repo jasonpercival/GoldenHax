@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     public float MinPlayerX;
     public float MaxPlayerX;
     public AudioSource audioSrc;
-    public AudioClip deathClip, damageClip;
+    public AudioClip deathClip, damageClip, attackClip;
 
     private Vector3 moveDirection = Vector3.zero;
     private CharacterController controller;
@@ -35,16 +35,30 @@ public class Player : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
-        anim = GetComponent<Animator>();
-        sr = GetComponent<SpriteRenderer>();
-        if (!controller || !sr || !anim)
+        if (!controller)
         {
-            Debug.LogError("Unable to get component on " + name);
+            Debug.LogError("Unable to get Character Controller component on " + name);
+        }
+
+        sr = GetComponent<SpriteRenderer>();
+        if (!sr)
+        {
+            Debug.LogError("Unable to get Character Controller component on " + name);
+        }
+
+        anim = GetComponent<Animator>();
+        if (!anim)
+        {
+            Debug.LogError("Unable to get Character Controller component on " + name);
         }
 
         if (!audioSrc)
         {
             audioSrc = GameObject.FindWithTag("GameController").GetComponent<AudioSource>();
+            if (!audioSrc)
+            {
+                Debug.LogError("Unable to get audio source on " + name);
+            }
         }
 
     }
@@ -84,10 +98,12 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown("Fire1") && !isAttacking)
         {
             anim.SetTrigger("Attack");
-            //moveDirection.x = 0.0f;
-            //horizontalMovement = 0.0f;
             isAttacking = true;
             StartCoroutine(ResetAttack());
+            if (audioSrc)
+            {
+                audioSrc.PlayOneShot(attackClip);
+            }
         }
 
         if ((isFacingRight && horizontalMovement < 0) || (!isFacingRight && horizontalMovement > 0))
@@ -112,7 +128,7 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(0.35f);
         isAttacking = false;
     }
-    
+
     private void Flip()
     {
         isFacingRight = !isFacingRight;
@@ -147,7 +163,7 @@ public class Player : MonoBehaviour
     // Make the player sprite flash temporarily with a given color
     IEnumerator FlashPlayer(Color color, float duration = 5.0f)
     {
-        
+
         for (int i = 0; i < duration; i++)
         {
             sr.color = color;
@@ -159,7 +175,12 @@ public class Player : MonoBehaviour
 
     private void Magic()
     {
-        anim.SetTrigger("Casting");
+        if (potions > 0)
+        {
+            anim.SetTrigger("Casting");
+            potions = 0;
+        }
+
     }
 
     public void TakeDamage()
@@ -173,9 +194,8 @@ public class Player : MonoBehaviour
         }
 
         health--;
-        if (health < 0)
+        if (health <= 0)
         {
-            health = 0;
             Death();
         }
     }
@@ -198,7 +218,7 @@ public class Player : MonoBehaviour
         // Start death animation
         isDead = true;
         anim.SetBool("IsDead", isDead);
-        StartCoroutine(FlashPlayer(Color.gray,10.0f));
+        StartCoroutine(FlashPlayer(Color.gray, 10.0f));
 
         // Respawn the player
         StartCoroutine(Respawn());
