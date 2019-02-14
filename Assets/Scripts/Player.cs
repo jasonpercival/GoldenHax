@@ -5,28 +5,34 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float speed = 6.0f;
-    public float jumpSpeed = 8.0f;
+    // player options
+    public float speed;
+    public float jumpSpeed;
     public float gravity = 20.0f;
     public float MinPlayerX;
     public float MaxPlayerX;
+
+    // audio references
     public AudioSource audioSrc;
     public AudioClip deathClip, damageClip, attackClip;
 
-    private Vector3 moveDirection = Vector3.zero;
+    // player state
+    public bool isDead = false;
+    private bool isFacingRight = true;
+    private bool isAttacking = false;
+    private bool isFrozen = false;
+
+    // component references
     private CharacterController controller;
     private Animator anim;
     private SpriteRenderer sr;
 
-    private bool isFacingRight = true;
-    private bool isAttacking = false;
-    private bool isHit = false;
-    public bool isDead = false;
+    // movement variables
+    private float horizontalMovement = 0.0f;
+    private float verticalMovement = 0.0f;
+    private Vector3 moveDirection = Vector3.zero;
 
-    float horizontalMovement = 0.0f;
-    float verticalMovement = 0.0f;
-
-    // TODO: Move this game state to the game manager when it's ready
+    // TODO: game state - move this to the game manager when it's ready
     public int healthMax = 6;
     public int health = 6;
     public int potionsMax = 6;
@@ -34,6 +40,9 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+
+        tag = "Player";
+
         controller = GetComponent<CharacterController>();
         if (!controller)
         {
@@ -61,6 +70,22 @@ public class Player : MonoBehaviour
             }
         }
 
+        // Check if speed variable was set in the inspector
+        if (speed <= 0 || speed > 10.0f)
+        {
+            // Assign a default value
+            speed = 6.0f;
+            Debug.LogWarning("Speed not set on " + name + ". Defaulting to " + speed);
+        }
+
+        // Check if jumpSpeed variable was set in the inspector
+        if (jumpSpeed <= 0 || jumpSpeed > 10.0f)
+        {
+            // Assign a default value
+            jumpSpeed = 8.0f;
+            Debug.LogWarning("JumpForce not set on " + name + ". Defaulting to " + jumpSpeed);
+        }
+
     }
 
     void Update()
@@ -79,7 +104,7 @@ public class Player : MonoBehaviour
             if (Input.GetButtonDown("Jump"))
             {
                 moveDirection.y = jumpSpeed;
-                moveDirection.z = 0.0f;
+                moveDirection.z = 0.0f;         // only allow jumping straight up and down
             }
 
             // Cast Magic 
@@ -116,8 +141,8 @@ public class Player : MonoBehaviour
             anim.SetFloat("VerticalMovement", verticalMovement);
         }
 
-        // Move the player only if jumping or not attackng while grounded and not hit
-        if (!controller.isGrounded || (controller.isGrounded && !isAttacking) && !isHit)
+        // Move the player only if jumping or not attackng while grounded and not frozen
+        if (!controller.isGrounded || (controller.isGrounded && !isAttacking) && !isFrozen && !isDead)
         {
             controller.Move(moveDirection * Time.deltaTime);
         }
@@ -177,15 +202,22 @@ public class Player : MonoBehaviour
     {
         if (potions > 0)
         {
+            isFrozen = true;
             anim.SetTrigger("Casting");
+            StartCoroutine(ResetFrozen(5.0f));
             potions = 0;
         }
+    }
 
+    IEnumerator ResetFrozen(float time)
+    {
+        yield return new WaitForSeconds(time);
+        isFrozen = false;
     }
 
     public void TakeDamage()
     {
-        isHit = true;
+        isFrozen = true;
         anim.SetTrigger("Damage");
 
         if (damageClip)
@@ -202,8 +234,7 @@ public class Player : MonoBehaviour
 
     public void TakeDamageComplete()
     {
-        isHit = false;
-        Debug.Log("Hit complete!");
+        isFrozen = false;
     }
 
     // Death animation
@@ -230,7 +261,7 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(5.0f);
 
         isDead = false;
-        isHit = false;
+        isFrozen = false;
         health = healthMax;
         anim.SetBool("IsDead", isDead);
     }
@@ -242,4 +273,5 @@ public class Player : MonoBehaviour
         targetPosition.x = Mathf.Clamp(targetPosition.x, MinPlayerX, MaxPlayerX);
         transform.position = targetPosition;
     }
+
 }

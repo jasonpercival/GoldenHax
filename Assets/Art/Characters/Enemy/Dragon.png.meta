@@ -1,56 +1,32 @@
 fileFormatVersion: 2
-guid: b9d6516594ede9e4799c93b08beff9e3
+guid: 4648affbc90868c47996798e95d5be5c
 TextureImporter:
   fileIDToRecycleName:
     21300000: Walk_0
     21300002: Walk_1
-    21300004: Walk_2
-    21300006: Walk_3
-    21300008: Walk_4
-    21300010: Walk_5
-    21300012: Walk_6
-    21300014: Walk_7
-    21300016: Run_0
-    21300018: Run_1
-    21300020: Run_2
-    21300022: Run_3
-    21300024: Run_4
-    21300026: Attack_0
-    21300028: Attack_1
-    21300030: Attack_2
-    21300032: Attack_3
-    21300034: Attack_4
-    21300036: Attack_5
-    21300038: Hit_0
-    21300040: Bonk_0
-    21300042: Bonk_1
-    21300044: Fall_0
-    21300046: Fall_1
-    21300048: Walk_1
-    21300050: Walk_2
-    21300052: Walk_3
-    21300054: Walk_4
-    21300056: Longmoan_4
-    21300058: Longmoan_5
-    21300060: Longmoan_6
-    21300062: Longmoan_7
-    21300064: Longmoan_8
-    21300066: Longmoan_9
-    21300068: Longmoan_10
-    21300070: Longmoan_11
-    21300072: Longmoan_12
-    21300074: Longmoan_13
-    21300076: Longmoan_14
-    21300078: Longmoan_15
-    21300080: Longmoan_16
-    21300082: Longmoan_17
-    21300084: Longmoan_18
-    21300086: Longmoan_19
-    21300088: Longmoan_20
-    21300090: Longmoan_21
-    21300092: Longmoan_22
-    21300094: Longmoan_23
-    21300096: Longmoan_24
+    21300004: Walk_3
+    21300006: Walk_4
+    21300008: Attack_2
+    21300010: Attack_1
+    21300012: Rest_0
+    21300014: Fireball_0
+    21300016: Fireball_2
+    21300018: Fireball_3
+    21300020: Fireball_4
+    21300022: Fireball_5
+    21300024: Dragon_12
+    21300026: Dragon_13
+    21300028: Dragon_14
+    21300030: Dragon_15
+    21300032: Dragon_16
+    21300034: Dragon_17
+    21300036: Dragon_18
+    21300038: Dragon_19
+    21300040: Dragon_20
+    21300042: Dragon_21
+    21300044: Dragon_22
+    21300046: Dragon_23
+    21300048: Dragon_24
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -85,7 +61,7 @@ TextureImporter:
     mipBias: -100
     wrapU: 1
     wrapV: 1
-    wrapW: 1
+    wrapW: -1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -166,13 +142,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Walk_1
+      name: Walk_0
       rect:
         serializedVersion: 2
-        x: 33
-        y: 375
-        width: 37
-        height: 58
+        x: 4
+        y: 360
+        width: 72
+        height: 68
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -180,19 +156,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8936445e1bda9074c9fe45e421abe16a
+      spriteID: 51b10e2d4aa8d4a41967c95636530f4d
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Walk_2
+      name: Walk_1
       rect:
         serializedVersion: 2
-        x: 76
-        y: 375
-        width: 37
-        height: 58
+        x: 84
+        y: 358
+        width: 75
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,7 +176,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: be2505f5aa7d28542ad7463e2e95c261
+      spriteID: eaebabfe54c7b5944aaa72c6264a3154
       vertices: []
       indices: 
       edges: []
@@ -209,10 +185,10 @@ TextureImporter:
       name: Walk_3
       rect:
         serializedVersion: 2
-        x: 118
-        y: 373
-        width: 39
-        height: 63
+        x: 169
+        y: 365
+        width: 78
+        height: 61
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -220,7 +196,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ccaf48683c5b924479ba446057f431c9
+      spriteID: 93b2a70930d0dd24ea92528a9ee99618
       vertices: []
       indices: 
       edges: []
@@ -229,9 +205,9 @@ TextureImporter:
       name: Walk_4
       rect:
         serializedVersion: 2
-        x: 158
-        y: 372
-        width: 37
+        x: 260
+        y: 363
+        width: 78
         height: 61
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -240,19 +216,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8cd5d1e4ddcdaf44d8d82581b13f9923
+      spriteID: 170b80fd344d86d4e9dbd96a9a92b77f
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Longmoan_4
+      name: Attack_2
       rect:
         serializedVersion: 2
-        x: 233
-        y: 375
-        width: 25
-        height: 60
+        x: 3
+        y: 281
+        width: 116
+        height: 61
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -260,19 +236,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 83338d7365556cd4cb94f2ff53518bc0
+      spriteID: e625c778ddb586d4abef6ee276b55f34
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Longmoan_5
+      name: Attack_1
       rect:
         serializedVersion: 2
-        x: 265
-        y: 371
-        width: 37
-        height: 64
+        x: 131
+        y: 277
+        width: 104
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -280,19 +256,59 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 342e34e8d06ad614582e4639e74d72f9
+      spriteID: ecade97c84a1be1408ea728f77443919
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Longmoan_6
+      name: Rest_0
       rect:
         serializedVersion: 2
-        x: 310
-        y: 371
+        x: 261
+        y: 273
+        width: 80
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e45cdefd87beb3e4b9c23af806cc4a72
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fireball_0
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 284
+        width: 23
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87c63680040a66946853de963f946eeb
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fireball_2
+      rect:
+        serializedVersion: 2
+        x: 376
+        y: 284
         width: 24
-        height: 64
+        height: 13
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -300,19 +316,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c145cc986201eb44694528841fb51fef
+      spriteID: 930034188351b644fbd7eca30769e9a9
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Longmoan_7
+      name: Fireball_3
       rect:
         serializedVersion: 2
-        x: 345
-        y: 371
-        width: 26
-        height: 66
+        x: 406
+        y: 279
+        width: 16
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -320,19 +336,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ad05db3261526fd429c28ce91602f21c
+      spriteID: e6eaa0efd5260d14f89acd49d0b0c991
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Longmoan_8
+      name: Fireball_4
       rect:
         serializedVersion: 2
-        x: 38
-        y: 306
-        width: 46
-        height: 56
+        x: 425
+        y: 271
+        width: 23
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -340,19 +356,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2064bbb150a56bc41950e7e676d6a739
+      spriteID: c5e3ae3a643a88a46bfe844300da112a
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Longmoan_9
+      name: Fireball_5
       rect:
         serializedVersion: 2
-        x: 93
-        y: 305
-        width: 44
-        height: 58
+        x: 457
+        y: 244
+        width: 29
+        height: 100
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -360,19 +376,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ff3bdf2cf8f2b334bb8735ca752c833f
+      spriteID: cb0f45c41db0db04184a0f6a6ebeba3a
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Longmoan_10
+      name: Dragon_12
       rect:
         serializedVersion: 2
-        x: 147
-        y: 307
-        width: 46
-        height: 56
+        x: 10
+        y: 160
+        width: 72
+        height: 68
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -380,19 +396,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4ee58622560ce8c48a8d42b0f5a7f953
+      spriteID: a62f382240b3c5d4e9bc6f05d18669bc
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Longmoan_11
+      name: Dragon_13
       rect:
         serializedVersion: 2
-        x: 207
-        y: 307
-        width: 45
-        height: 58
+        x: 90
+        y: 158
+        width: 75
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -400,19 +416,39 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 61701f0b610eb764b93d22f98fd68865
+      spriteID: 56de85c7bc99bdd41b5888a29472794b
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Longmoan_12
+      name: Dragon_14
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 165
+        width: 78
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15c3bc4c60673b64cba274d7c1266e21
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dragon_15
       rect:
         serializedVersion: 2
         x: 266
-        y: 309
-        width: 40
-        height: 46
+        y: 163
+        width: 78
+        height: 61
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -420,19 +456,79 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cfbd23c0ab9694e4199f8bcbed26fbb6
+      spriteID: f34fd3670ac44ce41a3fc86a9ab33e0d
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Longmoan_13
+      name: Dragon_16
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 192
+        width: 26
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac7ffc781fa329243b1f973c6536613d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dragon_17
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 192
+        width: 26
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01cab30afcccbda47a5c036a2acc2083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dragon_18
+      rect:
+        serializedVersion: 2
+        x: 438
+        y: 193
+        width: 26
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd63bbe3dbf295741801c5be98aa0d23
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dragon_19
       rect:
         serializedVersion: 2
         x: 9
-        y: 226
-        width: 44
-        height: 55
+        y: 81
+        width: 116
+        height: 61
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -440,19 +536,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 38d2822db5def13489c163b7e68092aa
+      spriteID: 69fbfbea89846eb40ac132cd4400a55a
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Longmoan_14
+      name: Dragon_20
       rect:
         serializedVersion: 2
-        x: 63
-        y: 224
-        width: 51
-        height: 60
+        x: 137
+        y: 77
+        width: 104
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -460,19 +556,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a74ff88186a2db047a1c4c6a59b6f0d4
+      spriteID: 1f17979bbb99a89478c4f294ed2ffe5f
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Longmoan_15
+      name: Dragon_21
       rect:
         serializedVersion: 2
-        x: 119
-        y: 223
+        x: 396
+        y: 129
         width: 59
-        height: 61
+        height: 47
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -480,19 +576,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 95e5198575066fc498503e09e3aa589b
+      spriteID: f9c8d3af687a7fc48aa6239094b764d8
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Longmoan_16
+      name: Dragon_22
       rect:
         serializedVersion: 2
-        x: 185
-        y: 224
-        width: 38
-        height: 61
+        x: 267
+        y: 73
+        width: 80
+        height: 31
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -500,19 +596,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cc9efc15757acbd4ab5ae8ba2f8b875f
+      spriteID: 3e867e7487a43504098568ccba10ef34
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Longmoan_17
+      name: Dragon_23
       rect:
         serializedVersion: 2
-        x: 237
-        y: 223
-        width: 55
-        height: 58
+        x: 401
+        y: 67
+        width: 59
+        height: 47
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -520,39 +616,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7be63d2a8e7978a4a8c584b240d24779
+      spriteID: 48ced670f83849042a77aa411f4317e4
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Longmoan_18
+      name: Dragon_24
       rect:
         serializedVersion: 2
-        x: 237
-        y: 223
-        width: 55
-        height: 58
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4cb6414a9b066464faff62bbdd5de0f6
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Longmoan_19
-      rect:
-        serializedVersion: 2
-        x: 307
-        y: 219
-        width: 60
-        height: 79
+        x: 407
+        y: 10
+        width: 59
+        height: 47
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -560,107 +636,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9808cc280ccc731459e45a207871332d
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Longmoan_20
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 156
-        width: 40
-        height: 62
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: be372eca6d1c30c4ba778b294cba47a8
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Longmoan_21
-      rect:
-        serializedVersion: 2
-        x: 111
-        y: 158
-        width: 42
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2bfc5de194b62d14787b2d7d6b102480
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Longmoan_22
-      rect:
-        serializedVersion: 2
-        x: 157
-        y: 159
-        width: 42
-        height: 39
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6de4b0ee0f4f5ad46a68afea7b4038aa
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Longmoan_23
-      rect:
-        serializedVersion: 2
-        x: 209
-        y: 165
-        width: 60
-        height: 35
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7b4326fcb42de5842a7c6f1222d3c1d9
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Longmoan_24
-      rect:
-        serializedVersion: 2
-        x: 275
-        y: 161
-        width: 64
-        height: 29
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 45e74ea7fef094241967dcbf679bbda2
+      spriteID: 5b4cb6288d1e29f468360077cfa301dc
       vertices: []
       indices: 
       edges: []
@@ -668,7 +644,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 773072725ca627d49b5e47aa9bcf0455
+    spriteID: c3c6d1df26fa57146a6a6589f5dd9d6e
     vertices: []
     indices: 
     edges: []

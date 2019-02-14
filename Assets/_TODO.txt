@@ -1,0 +1,23 @@
+﻿
+
+Add a second Powerup to change another an attribute within Character Script and show this by changing the Sprite animation
+
+    Powerup is anything Player can collide with, collect and be destroyed in game (adding something, health, speed…etc)
+
+Add a projectile to the attack animation
+
+    Projectile should be destroyed on impact
+    Projectile should move and be fired in direction Character is facing
+
+Use inheritance to create a base class Enemy that can be inherited from and modified to work with other Enemies
+
+    With that class, create a second moving enemy using another asset not used in the in-class example
+    Enemy should be moving at a different speed, different attack and should have a one hit kill by a projectile
+
+Create a second Ranged Enemy (also inheriting Enemy) that fires Projectiles into the air and lets the Projectiles bounce on the floor
+
+    Projectiles should be destroyed after 2 seconds not on Collision with the Ground​
+    Projectile can damage Player on the Ground or in air​
+    Time attacks so the Player can still pass through
+
+Submit everything as one ZIP file that has the Unity Project Folder

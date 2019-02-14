@@ -152,6 +152,7 @@ MonoBehaviour:
   audioSrc: {fileID: 0}
   deathClip: {fileID: 8300000, guid: fe58c53008d44fd4299c5f16d949113c, type: 3}
   damageClip: {fileID: 8300000, guid: 29213739de96a9741b397ccd73c0523f, type: 3}
+  attackClip: {fileID: 8300000, guid: 7ae192f41792d404796ee61ef35bb9a8, type: 3}
   isDead: 0
   healthMax: 6
   health: 6
@@ -168,8 +169,8 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 3.885713
-  m_Radius: 0.9953555
+  m_Height: 3
+  m_Radius: 0.6
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
