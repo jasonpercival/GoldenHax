@@ -4,34 +4,86 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    public float projectileSpeed;
+    public float projectileLifeTime;
+    public bool isTurret;
 
-    public float lifeTime;
+    Rigidbody rb;
+    Animator anim;
 
     void Start()
     {
-        // Check if 'lifeTime' variable was set in the inspector
-        if (lifeTime <= 0)
+        // Check if 'projectileLifeTime' variable was set in the inspector
+        if (projectileLifeTime <= 0)
         {
-            // Assign a default value if one was not set
-            lifeTime = 2.0f;
-            Debug.LogWarning("ProjectileForce not set. Defaulting to " + lifeTime);
+            projectileLifeTime = 2.0f;
+            Debug.LogWarning("ProjectileForce not set. Defaulting to " + projectileLifeTime);
         }
 
-        Destroy(gameObject, lifeTime);
+        // Check if 'projectileSpeed' variable was set in the inspector
+        if (projectileSpeed <= 0)
+        {
+            projectileSpeed = 5.0f;
+            Debug.LogWarning("ProjectileSpeed not set. Defaulting to " + projectileSpeed);
+        }
+
+        Destroy(gameObject, projectileLifeTime);
+
+        anim = GetComponent<Animator>();
+        if (!anim)
+        {
+            Debug.LogError("Animator missing on " + name);
+        }
+
+        rb = GetComponent<Rigidbody>();
+        if (!rb)
+        {
+            Debug.LogError("Rigidbody not found on " + name);
+        }
+
+        if (isTurret)
+        {
+            // shoot projectile into the air with gravity
+            rb.useGravity = true;
+            if (transform.localRotation.y == 0)
+            {
+                rb.AddForce(new Vector3(-0.5f, 1.5f) * projectileSpeed, ForceMode.Impulse);
+            }
+            else
+            {
+                rb.AddForce(new Vector3(0.5f, 1.5f) * projectileSpeed, ForceMode.Impulse);
+            }
+        }
+        else
+        {
+            // shoot projectile straight 
+            if (transform.localRotation.y == 0)
+            {
+                rb.AddForce(Vector3.left * projectileSpeed, ForceMode.Impulse);
+            }
+            else
+            {
+                rb.AddForce(Vector3.right * projectileSpeed, ForceMode.Impulse);
+            }
+        }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public void OnCollisionEnter(Collision collision)
     {
+        // projectile hit object
         if (collision.gameObject.CompareTag("Player"))
         {
+            rb.constraints = RigidbodyConstraints.FreezePosition;
+            anim.SetTrigger("Hit");
             Player player = collision.gameObject.GetComponent<Player>();
-            if (player)
-            {
-                player.TakeDamage();
-            }
-            // play projectile hitting animation then destroy projectile
-            Destroy(gameObject);
+            player.TakeDamage();
         }
     }
+
+    public void DestroyProjectile()
+    {
+        Destroy(gameObject);
+    }
+
 
 }

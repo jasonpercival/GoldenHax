@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Enemy
   - Projectile
+  - Boundary
+  - Weapon
   layers:
   - Default
   - TransparentFX
@@ -23,8 +25,8 @@ TagManager:
   - Enemy Hit
   - Background
   - Projectile
-  - 
-  - 
+  - Weapon
+  - Detection
   - 
   - 
   - 
