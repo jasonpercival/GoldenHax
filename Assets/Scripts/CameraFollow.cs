@@ -7,7 +7,7 @@ public class CameraFollow : MonoBehaviour
     public float smoothX;
     public float smoothY;
 
-    public GameObject player;
+    public GameObject target;
     public Vector3 minCameraPos;
     public Vector3 maxCameraPos;
 
@@ -17,19 +17,19 @@ public class CameraFollow : MonoBehaviour
 
     void Start()
     {
-        if (!player)
+        if (!target)
         {
             // get transform of player character
-            player = GameObject.Find("Player");
+            target = GameManager.instance.player1;
         }
     }
 
     private bool CheckBounds()
     {
 
-        float distance = Mathf.Abs(transform.position.x - player.transform.position.x);
+        float distance = Mathf.Abs(transform.position.x - target.transform.position.x);
 
-        Debug.Log("CameraX: " + transform.position.x + ", PlayerX: " + player.transform.position.x + ", Diff: " + distance);
+        Debug.Log("CameraX: " + transform.position.x + ", PlayerX: " + target.transform.position.x + ", Diff: " + distance);
 
         return distance > boundsX;
 
@@ -38,17 +38,22 @@ public class CameraFollow : MonoBehaviour
     private void LateUpdate()
     {
 
-        float posX = transform.position.x;
-        float posY = transform.position.y;
+        if (target)
+        {
 
-        //if (CheckBounds())
-        //{
-            posX = Mathf.SmoothDamp(transform.position.x, player.transform.position.x, ref velocity.x, smoothX);
-            posY = Mathf.SmoothDamp(transform.position.y, player.transform.position.y, ref velocity.y, smoothY);
-        //}
+            float posX = transform.position.x;
+            float posY = transform.position.y;
 
-        transform.position = new Vector3(Mathf.Clamp(posX, minCameraPos.x, maxCameraPos.x),
-            Mathf.Clamp(posY, minCameraPos.y, maxCameraPos.y), transform.position.z);
+            //if (CheckBounds())
+            //{
+            posX = Mathf.SmoothDamp(transform.position.x, target.transform.position.x, ref velocity.x, smoothX);
+            posY = Mathf.SmoothDamp(transform.position.y, target.transform.position.y, ref velocity.y, smoothY);
+            //}
+
+            transform.position = new Vector3(Mathf.Clamp(posX, minCameraPos.x, maxCameraPos.x),
+                Mathf.Clamp(posY, minCameraPos.y, maxCameraPos.y), transform.position.z);
+
+        }
 
     }
 }

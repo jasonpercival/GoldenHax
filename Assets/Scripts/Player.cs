@@ -14,7 +14,6 @@ public class Player : MonoBehaviour
     public float MaxPlayerX;            // player max X movement constraint
 
     // audio references
-    public AudioSource audioSrc;
     public AudioClip deathClip, damageClip, attackClip;
 
     // player state
@@ -33,16 +32,16 @@ public class Player : MonoBehaviour
     private float verticalMovement = 0.0f;
     private Vector3 moveDirection = Vector3.zero;
 
-    // TODO: game state - move this to the game manager when it's ready
+    // player state
     public int healthMax = 6;
     public int health = 6;
     public int potionsMax = 6;
     public int potions = 1;
-    public int lives = 2;
 
     void Start()
     {
         tag = "Player";
+        name = "Player";
 
         controller = GetComponent<CharacterController>();
         if (!controller)
@@ -60,15 +59,6 @@ public class Player : MonoBehaviour
         if (!anim)
         {
             Debug.LogError("Unable to get Character Controller component on " + name);
-        }
-
-        if (!audioSrc)
-        {
-            audioSrc = GameObject.FindWithTag("GameController").GetComponent<AudioSource>();
-            if (!audioSrc)
-            {
-                Debug.LogError("Unable to get audio source on " + name);
-            }
         }
 
         // Check if speed variable was set in the inspector
@@ -133,10 +123,7 @@ public class Player : MonoBehaviour
             anim.SetTrigger("Attack");
             isAttacking = true;
             StartCoroutine(ResetAttack());
-            if (audioSrc)
-            {
-                audioSrc.PlayOneShot(attackClip);
-            }
+            GameManager.instance.PlaySound(attackClip);
         }
 
         // Flip the sprite if moving in different direction
@@ -245,11 +232,7 @@ public class Player : MonoBehaviour
         isFrozen = true;
         StartCoroutine(ResetFrozen(1.0f));
         anim.SetTrigger("Damage");
-
-        if (damageClip)
-        {
-            audioSrc.PlayOneShot(damageClip);
-        }
+        GameManager.instance.PlaySound(damageClip);
 
         health--;
         if (health <= 0)
@@ -267,25 +250,18 @@ public class Player : MonoBehaviour
     public void Death()
     {
         // Play death sound clip
-        if (deathClip)
-        {
-            audioSrc.PlayOneShot(deathClip);
-        }
+        GameManager.instance.PlaySound(deathClip);
 
         // Start death animation
         isDead = true;
         anim.SetBool("IsDead", isDead);
         StartCoroutine(FlashSprite(Color.gray, 10.0f));
 
-        lives--;
-        if (lives > 0)
+        GameManager.instance.lives--;
+        if (GameManager.instance.lives > 0)
         {
             // Respawn the player
             StartCoroutine(Respawn());
-        }
-        else
-        {
-            StartCoroutine(Restart());
         }
     }
 
@@ -300,10 +276,4 @@ public class Player : MonoBehaviour
         anim.SetBool("IsDead", isDead);
     }
 
-    // Restart the game by reloading the scene
-    IEnumerator Restart()
-    {
-        yield return new WaitForSeconds(5.0f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
 }

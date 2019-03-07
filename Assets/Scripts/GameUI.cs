@@ -7,14 +7,24 @@ public class GameUI : MonoBehaviour
 {
     public GameObject[] player1_HealthBars;
     public Text player1Lives;
-    public Player player1;
     public Text gameOver;
+
+    Player player1;
+
+    private void Start()
+    {
+        player1 = GameManager.instance.player1.GetComponent<Player>();
+        if (!player1)
+        {
+            Debug.LogError("Unable to get reference to player 1 in " + name);
+        }
+    }
 
     void Update()
     {
         // update player 1 lives left
-        player1Lives.text = player1.lives.ToString();
-        if (player1.lives < 1)
+        player1Lives.text = GameManager.instance.lives.ToString();
+        if (GameManager.instance.lives < 1)
         {
             gameOver.enabled = true;
         }

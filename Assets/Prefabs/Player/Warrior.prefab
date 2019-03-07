@@ -204,7 +204,6 @@ MonoBehaviour:
   health: 6
   potionsMax: 6
   potions: 1
-  lives: 2
 --- !u!143 &2185820795807349995
 CharacterController:
   m_ObjectHideFlags: 0
