@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
     private Vector3 moveDirection = Vector3.zero;
 
     // player state
+    public int lives = 2;
     public int healthMax = 6;
     public int health = 6;
     public int potionsMax = 6;
@@ -257,11 +258,16 @@ public class Player : MonoBehaviour
         anim.SetBool("IsDead", isDead);
         StartCoroutine(FlashSprite(Color.gray, 10.0f));
 
-        GameManager.instance.lives--;
-        if (GameManager.instance.lives > 0)
+        lives--;
+        if (lives > 0)
         {
             // Respawn the player
             StartCoroutine(Respawn());
+        }
+        else
+        {
+            // Game Over
+            GameManager.instance.GameOver();
         }
     }
 

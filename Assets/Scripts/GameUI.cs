@@ -23,8 +23,8 @@ public class GameUI : MonoBehaviour
     void Update()
     {
         // update player 1 lives left
-        player1Lives.text = GameManager.instance.lives.ToString();
-        if (GameManager.instance.lives < 1)
+        player1Lives.text = player1.lives.ToString();
+        if (player1.lives < 1)
         {
             gameOver.enabled = true;
         }

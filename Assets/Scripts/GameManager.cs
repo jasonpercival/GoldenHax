@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviour
     public AudioClip stage1;
     public AudioClip gameOver;
 
-    private int _lives;
     private GameObject _player1;
     private GameState _gs = GameState.NullState;
     private AudioSource audioSrc;
@@ -48,7 +47,6 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        lives = 2;
         LoadLevel("Level1");
     }
 
@@ -118,29 +116,6 @@ public class GameManager : MonoBehaviour
         set { _instance = value; }
     }
 
-    public int lives
-    {
-        get { return _lives; }
-        set
-        {
-            _lives = value;
-            if (gs == GameState.Game)
-            {
-                if (_lives > 0)
-                {
-                    // restart level
-                    // SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-                }
-                else
-                {
-                    Debug.Log("Player Dead");
-                    PlayMusic(gameOver);
-                    Invoke("LoadMainMenu", 5);
-                }
-            }
-        }
-    }
-
     public GameState gs
     {
         get { return _gs; }
@@ -157,4 +132,9 @@ public class GameManager : MonoBehaviour
         set { _player1 = value; }
     }
 
+    internal void GameOver()
+    {
+        PlayMusic(gameOver);
+        Invoke("LoadMainMenu", 5);
+    }
 }

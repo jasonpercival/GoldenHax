@@ -7,6 +7,7 @@ public class Projectile : MonoBehaviour
     public float projectileSpeed;
     public float projectileLifeTime;
     public bool isTurret;
+    public ParticleSystem deathExplosion;
 
     Rigidbody rb;
     Animator anim;
@@ -83,6 +84,14 @@ public class Projectile : MonoBehaviour
     public void DestroyProjectile()
     {
         Destroy(gameObject);
+
+        if (deathExplosion)
+        {
+            ParticleSystem temp = Instantiate(deathExplosion, transform.position, transform.rotation);
+
+            // Length of partical system life
+            Destroy(temp, deathExplosion.main.duration);
+        }
     }
 
 
