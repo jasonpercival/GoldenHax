@@ -7,6 +7,8 @@ public class Projectile : MonoBehaviour
 
     public float lifeTime;
 
+    private Animator anim;
+
     void Start()
     {
         // Check if 'lifeTime' variable was set in the inspector
@@ -17,21 +19,21 @@ public class Projectile : MonoBehaviour
             Debug.LogWarning("ProjectileForce not set. Defaulting to " + lifeTime);
         }
 
+        anim = GetComponent<Animator>();
+        if (!anim)
+        {
+            Debug.LogError("Animator missing on " + name);
+        }
+
         Destroy(gameObject, lifeTime);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public void Hit()
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            Player player = collision.gameObject.GetComponent<Player>();
-            if (player)
-            {
-                player.TakeDamage();
-            }
-            // play projectile hitting animation then destroy projectile
-            Destroy(gameObject);
-        }
+        anim.SetTrigger("Hit");
+        
+        Destroy(gameObject, 1.0f);
     }
+
 
 }

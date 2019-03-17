@@ -274,4 +274,15 @@ public class Player : MonoBehaviour
         transform.position = targetPosition;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Projectile"))
+        {
+            TakeDamage();
+            // play projectile hitting animation then destroy projectile
+            Projectile projectile = other.gameObject.GetComponent<Projectile>();
+            projectile.Hit();
+        }
+    }
+
 }

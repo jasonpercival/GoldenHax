@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DragonRed : Enemy
+public class EnemyRanged : Enemy
 {
+    public float fireRate;
     public Rigidbody projectile;            // What projectile to spawn 
     public Transform projectileSpawnPoint;  // Where to spawn projectile
     public float projectileForce;           // How fast is projectile
+
+    float timeSinceLastFire;
+
+    Rigidbody rb;
 
     void Start()
     {
@@ -29,15 +34,21 @@ public class DragonRed : Enemy
             projectileForce = 5.0f;
             Debug.LogWarning("ProjectileForce not set. Defaulting to " + projectileForce);
         }
+        // Check if 'fireRate' variable was set in the inspector
+        if (fireRate <= 0)
+        {
+            // Assign a default value if one was not set
+            fireRate = 2.0f;
+            Debug.LogWarning("fireRate not set. Defaulting to " + fireRate);
+        }
+
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isAttacking)
-        {
-            StartCoroutine(CastFireBall());
-        }
+
     }
 
     public void Fire()
@@ -50,21 +61,43 @@ public class DragonRed : Enemy
                 projectileSpawnPoint.rotation);
 
             // Stop 'Enemy' from hitting 'Projectile'
-            Physics.IgnoreCollision(GetComponent<CapsuleCollider>(),temp.GetComponent<CapsuleCollider>(), true);
+            Physics.IgnoreCollision(GetComponent<CapsuleCollider>(), temp.GetComponent<CapsuleCollider>(), true);
 
             // Check what direction 'Character' is facing before firing
             if (isFacingRight)
+            {
+                temp.transform.Rotate(0, 180, 0);
                 temp.AddForce(projectileSpawnPoint.right * projectileForce, ForceMode.Impulse);
+            }
             else
                 temp.AddForce(-projectileSpawnPoint.right * projectileForce, ForceMode.Impulse);
         }
     }
 
-    IEnumerator CastFireBall()
+
+    // Trigger when player enters attack range
+    private void OnTriggerStay(Collider other)
     {
-        isAttacking = true;
-        yield return new WaitForSeconds(2.0f);
-        Fire();
-        isAttacking = false;
+        if (other.gameObject.CompareTag("Player"))
+        {
+            // face the player first
+            Vector3 difference = other.gameObject.transform.position - transform.position;
+            Debug.Log(difference.x + " isFacingRight: " + isFacingRight);
+
+            if (difference.x > 0 && !isFacingRight)
+            {
+                Flip();
+            }
+            else if (difference.x < 0 && isFacingRight)
+            {
+                Flip();
+            }
+
+            if (Time.time > timeSinceLastFire + fireRate)
+            {
+                Fire();
+                timeSinceLastFire = Time.time;
+            }
+        }
     }
 }
