@@ -282,4 +282,26 @@ public class Player : MonoBehaviour
         anim.SetBool("IsDead", isDead);
     }
 
+<<<<<<< HEAD
+    private void LateUpdate()
+    {
+        // clamp the player into the play area
+        Vector3 targetPosition = transform.position;
+        targetPosition.x = Mathf.Clamp(targetPosition.x, MinPlayerX, MaxPlayerX);
+        transform.position = targetPosition;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Projectile"))
+        {
+            TakeDamage();
+            // play projectile hitting animation then destroy projectile
+            Projectile projectile = other.gameObject.GetComponent<Projectile>();
+            projectile.Hit();
+        }
+    }
+
+=======
+>>>>>>> 8f04add5ebb23dbd862e1ca854f98012863272b7
 }
