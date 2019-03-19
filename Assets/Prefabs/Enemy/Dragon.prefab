@@ -10,11 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 426917405}
   - component: {fileID: 426917406}
-<<<<<<< HEAD
-  m_Layer: 0
-=======
   m_Layer: 17
->>>>>>> 8f04add5ebb23dbd862e1ca854f98012863272b7
   m_Name: DetectionRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,11 +42,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-<<<<<<< HEAD
-  m_Size: {x: 15, y: 1, z: 1}
-=======
   m_Size: {x: 15, y: 1, z: 0.25}
->>>>>>> 8f04add5ebb23dbd862e1ca854f98012863272b7
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7743188753073781395
 GameObject:
@@ -62,10 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7743188753073781394}
   - component: {fileID: 7743188753073781393}
-<<<<<<< HEAD
-=======
   - component: {fileID: 153951281}
->>>>>>> 8f04add5ebb23dbd862e1ca854f98012863272b7
   - component: {fileID: 7743188753073781391}
   - component: {fileID: 7743188753073781392}
   - component: {fileID: 7743188753073781390}
@@ -140,8 +129,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
-<<<<<<< HEAD
-=======
 --- !u!95 &153951281
 Animator:
   serializedVersion: 3
@@ -161,7 +148,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
->>>>>>> 8f04add5ebb23dbd862e1ca854f98012863272b7
 --- !u!54 &7743188753073781391
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -188,11 +174,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-<<<<<<< HEAD
-  m_Radius: 1.7142857
-=======
   m_Radius: 0.79
->>>>>>> 8f04add5ebb23dbd862e1ca854f98012863272b7
   m_Height: 3.2380953
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -208,15 +190,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 289bcc59e22e6714ab0ca242ccafa5c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
-  health: 6
-  speed: 3
-  fireRate: 0
-  projectile: {fileID: 670669866748747952, guid: 29a3bd07b54621d4881a995651283d92,
-    type: 3}
-  projectileSpawnPoint: {fileID: 7743188753395986359}
-  projectileForce: 6
-=======
   health: 1
   speed: 3
   attackRate: 2
@@ -225,7 +198,6 @@ MonoBehaviour:
   projectile: {fileID: 670669866748747952, guid: 29a3bd07b54621d4881a995651283d92,
     type: 3}
   projectileSpawnPoint: {fileID: 7743188753395986359}
->>>>>>> 8f04add5ebb23dbd862e1ca854f98012863272b7
 --- !u!1 &7743188753395986360
 GameObject:
   m_ObjectHideFlags: 0

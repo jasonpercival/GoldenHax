@@ -1,20 +1,17 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyRanged : Enemy
 {
-    public float fireRate;
     public Rigidbody projectile;            // What projectile to spawn 
     public Transform projectileSpawnPoint;  // Where to spawn projectile
-    public float projectileForce;           // How fast is projectile
-
-    float timeSinceLastFire;
-
-    Rigidbody rb;
-
-    void Start()
+    
+    public override void Start()
     {
+        base.Start();
+
         // Check if 'projectile' variable was set in the inspector
         if (!projectile)
         {
@@ -27,94 +24,63 @@ public class EnemyRanged : Enemy
             Debug.LogError("ProjectileSpawnPoint not found on " + name);
         }
 
-        // Check if 'projectileForce' variable was set in the inspector
-        if (projectileForce <= 0)
-        {
-            // Assign a default value if one was not set
-            projectileForce = 5.0f;
-            Debug.LogWarning("ProjectileForce not set. Defaulting to " + projectileForce);
-        }
-        // Check if 'fireRate' variable was set in the inspector
-        if (fireRate <= 0)
-        {
-            // Assign a default value if one was not set
-            fireRate = 2.0f;
-            Debug.LogWarning("fireRate not set. Defaulting to " + fireRate);
-        }
-
-        rb = GetComponent<Rigidbody>();
+        FaceTarget();
     }
 
-<<<<<<< HEAD
+    private void Update()
+    {
+        // Move in the direction the enemy is facing
+        if (isFacingRight)
+        {
+            rb.velocity = new Vector3(speed, 0, 0);
+        }
+        else
+        {
+            rb.velocity = new Vector3(-speed, 0, 0);
+        }
+
+        anim.SetFloat("Movement", Mathf.Abs(rb.velocity.x));
+    }
+
     public override void Attack()
-=======
-    // Update is called once per frame
-    void Update()
->>>>>>> e9d96f33be5e910b37aa909d5a6c9be772947915
     {
+        FaceTarget();
 
-    }
-
-    public void Fire()
-    {
-        // Check if 'projectileSpawnPoint' and 'projectile' exist
-        if (projectileSpawnPoint && projectile)
+        // Create the 'Projectile' and add to Scene
+        Quaternion rotation = Quaternion.Euler(Vector3.zero);
+        if (isFacingRight)
         {
-            // Create the 'Projectile' and add to Scene
-            Rigidbody temp = Instantiate(projectile, projectileSpawnPoint.position,
-                projectileSpawnPoint.rotation);
-
-<<<<<<< HEAD
-        Rigidbody projectileInstance = Instantiate(projectile, projectileSpawnPoint.position, rotation);
-=======
-            // Stop 'Enemy' from hitting 'Projectile'
-            Physics.IgnoreCollision(GetComponent<CapsuleCollider>(), temp.GetComponent<CapsuleCollider>(), true);
-
-            // Check what direction 'Character' is facing before firing
-            if (isFacingRight)
-            {
-                temp.transform.Rotate(0, 180, 0);
-                temp.AddForce(projectileSpawnPoint.right * projectileForce, ForceMode.Impulse);
-            }
-            else
-                temp.AddForce(-projectileSpawnPoint.right * projectileForce, ForceMode.Impulse);
+            rotation = Quaternion.Euler(new Vector3(0, 180.0f, 0));
         }
->>>>>>> e9d96f33be5e910b37aa909d5a6c9be772947915
+
+        Rigidbody projectileInstance = Instantiate(projectile, projectileSpawnPoint.position, rotation);
     }
 
-
-    // Trigger when player enters attack range
+    // Trigger attack when player enters collider range
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            // face the player first
-            Vector3 difference = other.gameObject.transform.position - transform.position;
-            Debug.Log(difference.x + " isFacingRight: " + isFacingRight);
+            Player player = other.GetComponent<Player>();
+            if (!player.isDead)
+            {
 
-<<<<<<< HEAD
                 // fire the projectile if ready and player is alive
                 if (Time.time > timeSinceLastFire + attackRate)
                 {
                     Attack();
                     timeSinceLastFire = Time.time;
                 }
-=======
-            if (difference.x > 0 && !isFacingRight)
-            {
-                Flip();
             }
-            else if (difference.x < 0 && isFacingRight)
-            {
-                Flip();
->>>>>>> e9d96f33be5e910b37aa909d5a6c9be772947915
-            }
+        }
+    }
 
-            if (Time.time > timeSinceLastFire + fireRate)
-            {
-                Fire();
-                timeSinceLastFire = Time.time;
-            }
+    // Walk the other direction if we hit a wall
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Boundary"))
+        {
+            Flip();
         }
     }
 }

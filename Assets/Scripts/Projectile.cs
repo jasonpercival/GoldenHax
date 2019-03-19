@@ -12,8 +12,6 @@ public class Projectile : MonoBehaviour
     Rigidbody rb;
     Animator anim;
 
-    private Animator anim;
-
     void Start()
     {
         // Check if 'projectileLifeTime' variable was set in the inspector
@@ -23,8 +21,6 @@ public class Projectile : MonoBehaviour
             Debug.LogWarning("ProjectileForce not set. Defaulting to " + projectileLifeTime);
         }
 
-<<<<<<< HEAD
-=======
         // Check if 'projectileSpeed' variable was set in the inspector
         if (projectileSpeed <= 0)
         {
@@ -34,25 +30,12 @@ public class Projectile : MonoBehaviour
 
         Destroy(gameObject, projectileLifeTime);
 
->>>>>>> 8f04add5ebb23dbd862e1ca854f98012863272b7
         anim = GetComponent<Animator>();
         if (!anim)
         {
             Debug.LogError("Animator missing on " + name);
         }
 
-<<<<<<< HEAD
-        Destroy(gameObject, lifeTime);
-    }
-
-    public void Hit()
-    {
-        anim.SetTrigger("Hit");
-        
-        Destroy(gameObject, 1.0f);
-    }
-
-=======
         rb = GetComponent<Rigidbody>();
         if (!rb)
         {
@@ -111,6 +94,5 @@ public class Projectile : MonoBehaviour
         }
     }
 
->>>>>>> 8f04add5ebb23dbd862e1ca854f98012863272b7
 
 }
