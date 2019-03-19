@@ -15,8 +15,9 @@ public class Stage1 : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.gameObject.CompareTag("Player"))
         {
+            // switch to the boss zone music
             if (audioSrc.isPlaying)
                 audioSrc.Stop();
 

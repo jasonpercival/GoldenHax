@@ -93,7 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113fc19f1f90c234189439cf94a6a7d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBonus: 1
+  healthBonus: 2
   potionBonus: 0
   collectItemClip: {fileID: 8300000, guid: 1a15973a4f73d6947a9a0ca87599b254, type: 3}
 --- !u!65 &2561549382386801633

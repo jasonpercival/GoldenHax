@@ -4,51 +4,43 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public float smoothX;
-    public float smoothY;
 
-    public GameObject player;
-    public Vector3 minCameraPos;
-    public Vector3 maxCameraPos;
+    Transform target;               // Target the camera will follow
+    public Transform camBoundMin;   // Lowest and leftest value camera can move
+    public Transform camBoundMax;   // Highest and rightest value camera can move 
 
-    public float boundsX;
-
-    private Vector2 velocity;
+    float xMin, xMax, yMin, yMax;
 
     void Start()
     {
-        if (!player)
+   
+        // Find 'Player' in scene
+        GameObject go = GameObject.FindWithTag("Player");
+        if (!go)
         {
-            // get transform of player character
-            player = GameObject.Find("Player");
+            Debug.Log("Player not found.");
+            return;
         }
+
+        target = go.GetComponent<Transform>();
+
+        // Uses GameObjecs to set the min and max values for the camera movement
+        xMin = camBoundMin.position.x;
+        yMin = camBoundMin.position.y;
+
+        xMax = camBoundMax.position.x;
+        yMax = camBoundMax.position.y;
     }
 
-    private bool CheckBounds()
+    // Update is called once per frame
+    void Update()
     {
-
-        float distance = Mathf.Abs(transform.position.x - player.transform.position.x);
-
-        Debug.Log("CameraX: " + transform.position.x + ", PlayerX: " + player.transform.position.x + ", Diff: " + distance);
-
-        return distance > boundsX;
-
-    }
-
-    private void LateUpdate()
-    {
-
-        float posX = transform.position.x;
-        float posY = transform.position.y;
-
-        //if (CheckBounds())
-        //{
-            posX = Mathf.SmoothDamp(transform.position.x, player.transform.position.x, ref velocity.x, smoothX);
-            posY = Mathf.SmoothDamp(transform.position.y, player.transform.position.y, ref velocity.y, smoothY);
-        //}
-
-        transform.position = new Vector3(Mathf.Clamp(posX, minCameraPos.x, maxCameraPos.x),
-            Mathf.Clamp(posY, minCameraPos.y, maxCameraPos.y), transform.position.z);
-
+        if (target)
+        {
+            transform.position = new Vector3(
+                Mathf.Clamp(target.position.x, xMin, xMax),
+                Mathf.Clamp(target.position.y, yMin, yMax),
+                transform.position.z);
+        }
     }
 }

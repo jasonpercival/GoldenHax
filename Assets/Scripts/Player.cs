@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -9,11 +10,10 @@ public class Player : MonoBehaviour
     public float speed;
     public float jumpSpeed;
     public float gravity = 20.0f;
-    public float MinPlayerX;
-    public float MaxPlayerX;
+    public float MinPlayerX;            // player min X movement constraint
+    public float MaxPlayerX;            // player max X movement constraint
 
     // audio references
-    public AudioSource audioSrc;
     public AudioClip deathClip, damageClip, attackClip;
 
     // player state
@@ -32,7 +32,8 @@ public class Player : MonoBehaviour
     private float verticalMovement = 0.0f;
     private Vector3 moveDirection = Vector3.zero;
 
-    // TODO: game state - move this to the game manager when it's ready
+    // player state
+    public int lives = 2;
     public int healthMax = 6;
     public int health = 6;
     public int potionsMax = 6;
@@ -40,8 +41,8 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-
         tag = "Player";
+        name = "Player";
 
         controller = GetComponent<CharacterController>();
         if (!controller)
@@ -61,15 +62,6 @@ public class Player : MonoBehaviour
             Debug.LogError("Unable to get Character Controller component on " + name);
         }
 
-        if (!audioSrc)
-        {
-            audioSrc = GameObject.FindWithTag("GameController").GetComponent<AudioSource>();
-            if (!audioSrc)
-            {
-                Debug.LogError("Unable to get audio source on " + name);
-            }
-        }
-
         // Check if speed variable was set in the inspector
         if (speed <= 0 || speed > 10.0f)
         {
@@ -85,6 +77,13 @@ public class Player : MonoBehaviour
             jumpSpeed = 8.0f;
             Debug.LogWarning("JumpForce not set on " + name + ". Defaulting to " + jumpSpeed);
         }
+
+        // Check movement constraints
+        if (MinPlayerX == 0 || MaxPlayerX == 0)
+        {
+            Debug.LogWarning("Player MinX/MaxX movement constraints not set.");
+        }
+
 
     }
 
@@ -125,15 +124,20 @@ public class Player : MonoBehaviour
             anim.SetTrigger("Attack");
             isAttacking = true;
             StartCoroutine(ResetAttack());
-            if (audioSrc)
+            GameManager.instance.PlaySound(attackClip);
+        }
+
+        // Flip the sprite if moving in different direction
+        if (!isDead)
+        {
+            if ((isFacingRight && horizontalMovement < 0) ||
+                (!isFacingRight && horizontalMovement > 0))
             {
-                audioSrc.PlayOneShot(attackClip);
+                Flip();
             }
         }
 
-        if ((isFacingRight && horizontalMovement < 0) || (!isFacingRight && horizontalMovement > 0))
-            Flip();
-
+        // Update animator with movement values
         if (anim)
         {
             anim.SetBool("Grounded", controller.isGrounded);
@@ -146,6 +150,14 @@ public class Player : MonoBehaviour
         {
             controller.Move(moveDirection * Time.deltaTime);
         }
+    }
+
+    private void LateUpdate()
+    {
+        // clamp the player into the play area
+        Vector3 targetPosition = transform.position;
+        targetPosition.x = Mathf.Clamp(targetPosition.x, MinPlayerX, MaxPlayerX);
+        transform.position = targetPosition;
     }
 
     IEnumerator ResetAttack()
@@ -181,14 +193,13 @@ public class Player : MonoBehaviour
         {
             AddHealth(healthBonus);
             AddPotion(potionBonus);
-            StartCoroutine(FlashPlayer(Color.gray));
+            StartCoroutine(FlashSprite(Color.gray));
         }
     }
 
     // Make the player sprite flash temporarily with a given color
-    IEnumerator FlashPlayer(Color color, float duration = 5.0f)
+    IEnumerator FlashSprite(Color color, float duration = 5.0f)
     {
-
         for (int i = 0; i < duration; i++)
         {
             sr.color = color;
@@ -198,6 +209,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    // cast magic potion
     private void Magic()
     {
         if (potions > 0)
@@ -206,6 +218,7 @@ public class Player : MonoBehaviour
             anim.SetTrigger("Casting");
             StartCoroutine(ResetFrozen(5.0f));
             potions = 0;
+            // TODO: implement magic animation effect and knockdown all enemies
         }
     }
 
@@ -218,12 +231,9 @@ public class Player : MonoBehaviour
     public void TakeDamage()
     {
         isFrozen = true;
+        StartCoroutine(ResetFrozen(1.0f));
         anim.SetTrigger("Damage");
-
-        if (damageClip)
-        {
-            audioSrc.PlayOneShot(damageClip);
-        }
+        GameManager.instance.PlaySound(damageClip);
 
         health--;
         if (health <= 0)
@@ -241,18 +251,24 @@ public class Player : MonoBehaviour
     public void Death()
     {
         // Play death sound clip
-        if (deathClip)
-        {
-            audioSrc.PlayOneShot(deathClip);
-        }
+        GameManager.instance.PlaySound(deathClip);
 
         // Start death animation
         isDead = true;
         anim.SetBool("IsDead", isDead);
-        StartCoroutine(FlashPlayer(Color.gray, 10.0f));
+        StartCoroutine(FlashSprite(Color.gray, 10.0f));
 
-        // Respawn the player
-        StartCoroutine(Respawn());
+        lives--;
+        if (lives > 0)
+        {
+            // Respawn the player
+            StartCoroutine(Respawn());
+        }
+        else
+        {
+            // Game Over
+            GameManager.instance.GameOver();
+        }
     }
 
     // Respawns the player from death after a timeout
@@ -266,6 +282,7 @@ public class Player : MonoBehaviour
         anim.SetBool("IsDead", isDead);
     }
 
+<<<<<<< HEAD
     private void LateUpdate()
     {
         // clamp the player into the play area
@@ -285,4 +302,6 @@ public class Player : MonoBehaviour
         }
     }
 
+=======
+>>>>>>> 8f04add5ebb23dbd862e1ca854f98012863272b7
 }
