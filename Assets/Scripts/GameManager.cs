@@ -9,17 +9,30 @@ public enum GameState { NullState, MainMenu, Game };
 public class GameManager : MonoBehaviour
 {
     static GameManager _instance = null;
+    public static GameManager instance
+    {
+        get { return _instance; }
+        set { _instance = value; }
+    }
+
+    private GameState _gs = GameState.NullState;
+
+    public GameState gs
+    {
+        get { return _gs; }
+        set
+        {
+            _gs = value;
+            Debug.Log("Current State: " + _gs);
+        }
+    }
 
     public GameObject playerPrefab;
+    public GameObject player1 { get; set; }
 
-    [Header("Audio")]
-    public AudioClip titleScreen;
-    public AudioClip stage1;
-    public AudioClip gameOver;
-
-    private GameObject _player1;
-    private GameState _gs = GameState.NullState;
-    private AudioSource audioSrc;
+    // player preferences
+    private const string MUSIC_VOLUME = "MusicVolume";
+    private const string SOUND_VOLUME = "SoundVolume";
 
     void Awake()
     {
@@ -36,13 +49,36 @@ public class GameManager : MonoBehaviour
         gs = GameState.MainMenu;
     }
 
-    public void Start()
+    public void LoadPlayerPrefs()
     {
-        audioSrc = GetComponent<AudioSource>();
-        if (!audioSrc)
+        // music volume
+        if (PlayerPrefs.HasKey(MUSIC_VOLUME))
         {
-            Debug.LogError("AudioSource component not found on " + name);
+            SoundManager.instance.musicSource.volume = PlayerPrefs.GetFloat(MUSIC_VOLUME);
         }
+        else
+        {
+            PlayerPrefs.SetFloat(MUSIC_VOLUME, SoundManager.instance.musicSource.volume);
+            PlayerPrefs.Save();
+        }
+
+        // sound volume
+        if (PlayerPrefs.HasKey(SOUND_VOLUME))
+        {
+            SoundManager.instance.sfxSource.volume = PlayerPrefs.GetFloat(SOUND_VOLUME);
+        }
+        else
+        {
+            PlayerPrefs.SetFloat(SOUND_VOLUME, SoundManager.instance.sfxSource.volume);
+            PlayerPrefs.Save();
+        }
+    }
+
+    public void SavePlayerPrefs()
+    {
+        PlayerPrefs.SetFloat(MUSIC_VOLUME, SoundManager.instance.musicSource.volume);
+        PlayerPrefs.SetFloat(SOUND_VOLUME, SoundManager.instance.sfxSource.volume);
+        PlayerPrefs.Save();
     }
 
     public void StartGame()
@@ -55,51 +91,25 @@ public class GameManager : MonoBehaviour
         LoadLevel("MainMenu");
     }
 
-    public void PlayMusic(AudioClip audioClip)
-    {
-        if (audioSrc.isPlaying)
-            audioSrc.Stop();
-
-        if (audioClip)
-        {
-            audioSrc.clip = audioClip;
-            audioSrc.Play();
-        }
-    }
-
-    public void PlaySound(AudioClip audioClip)
-    {
-        if (audioClip)
-        {
-            audioSrc.PlayOneShot(audioClip);
-        }
-    }
-
     public void LoadLevel(string levelName)
     {
         switch (levelName)
         {
             case "MainMenu":
                 gs = GameState.MainMenu;
-                PlayMusic(titleScreen);
+                SoundManager.instance.PlayMusic(SoundManager.instance.titleScreen);
                 break;
             case "Level1":
                 gs = GameState.Game;
-                PlayMusic(stage1);
+                SoundManager.instance.PlayMusic(SoundManager.instance.stage1);
                 break;
             default:
                 gs = GameState.NullState;
-                PlayMusic(null);
+                SoundManager.instance.PlayMusic(null);
                 break;
         }
 
         SceneManager.LoadScene(levelName);
-    }
-
-    public void QuitGame()
-    {
-        Debug.Log("Quit");
-        Application.Quit();
     }
 
     public void SpawnPlayer(Transform spawnLocation)
@@ -110,31 +120,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public static GameManager instance
+    public void GameOver()
     {
-        get { return _instance; }
-        set { _instance = value; }
-    }
-
-    public GameState gs
-    {
-        get { return _gs; }
-        set
-        {
-            _gs = value;
-            Debug.Log("Current State: " + _gs);
-        }
-    }
-
-    public GameObject player1
-    {
-        get { return _player1; }
-        set { _player1 = value; }
-    }
-
-    internal void GameOver()
-    {
-        PlayMusic(gameOver);
+        SoundManager.instance.PlayMusic(SoundManager.instance.gameOver, loop: false);
         Invoke("LoadMainMenu", 5);
     }
 }

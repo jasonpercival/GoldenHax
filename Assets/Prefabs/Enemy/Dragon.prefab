@@ -193,6 +193,8 @@ MonoBehaviour:
   health: 1
   speed: 3
   attackRate: 2
+  damageEffect: {fileID: 6049880245554935337, guid: 6a23106190d80ec42bc06f00047a3438,
+    type: 3}
   projectile: {fileID: 670669866748747952, guid: 29a3bd07b54621d4881a995651283d92,
     type: 3}
   projectileSpawnPoint: {fileID: 7743188753395986359}

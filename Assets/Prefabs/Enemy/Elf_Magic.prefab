@@ -11,13 +11,13 @@ GameObject:
   - component: {fileID: 6041301656161043760}
   - component: {fileID: 6041301656161043767}
   - component: {fileID: 3820873657175844445}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Elf_Magic
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6041301656161043760
 Transform:
   m_ObjectHideFlags: 0
@@ -89,6 +89,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6041301656161043766}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9928ee6461dfd74fbc050d16d955a30, type: 3}
+  m_Script: {fileID: 11500000, guid: bdc6b61b149445d48a5f0b705d46b471, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 0
+  speed: 0
+  attackRate: 0

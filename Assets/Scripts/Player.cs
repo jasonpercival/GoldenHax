@@ -84,7 +84,6 @@ public class Player : MonoBehaviour
             Debug.LogWarning("Player MinX/MaxX movement constraints not set.");
         }
 
-
     }
 
     void Update()
@@ -124,7 +123,8 @@ public class Player : MonoBehaviour
             anim.SetTrigger("Attack");
             isAttacking = true;
             StartCoroutine(ResetAttack());
-            GameManager.instance.PlaySound(attackClip);
+            // play sound
+            SoundManager.instance.PlaySound(attackClip);
         }
 
         // Flip the sprite if moving in different direction
@@ -233,7 +233,7 @@ public class Player : MonoBehaviour
         isFrozen = true;
         StartCoroutine(ResetFrozen(1.0f));
         anim.SetTrigger("Damage");
-        GameManager.instance.PlaySound(damageClip);
+        SoundManager.instance.PlaySound(damageClip);
 
         health--;
         if (health <= 0)
@@ -251,7 +251,7 @@ public class Player : MonoBehaviour
     public void Death()
     {
         // Play death sound clip
-        GameManager.instance.PlaySound(deathClip);
+        SoundManager.instance.PlaySound(deathClip);
 
         // Start death animation
         isDead = true;

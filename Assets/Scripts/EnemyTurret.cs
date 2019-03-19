@@ -27,7 +27,7 @@ public class EnemyTurret : Enemy
         FaceTarget();
     }
 
-    public void Fire()
+    public override void Attack()
     {
         FaceTarget();
 
@@ -39,9 +39,6 @@ public class EnemyTurret : Enemy
         }
 
         Rigidbody projectileInstance = Instantiate(projectile, projectileSpawnPoint.position, rotation);
-
-        //// Stop 'Enemy' from hitting 'Projectile'
-        //Physics.IgnoreCollision(GetComponent<CapsuleCollider>(), projectileInstance.GetComponent<CapsuleCollider>(), true);
     }
 
     // Trigger attack when player enters collider range
@@ -55,7 +52,7 @@ public class EnemyTurret : Enemy
                 // fire the projectile if ready and player is alive
                 if (Time.time > timeSinceLastFire + attackRate)
                 {
-                    Fire();
+                    Attack();
                     timeSinceLastFire = Time.time;
                 }
             }

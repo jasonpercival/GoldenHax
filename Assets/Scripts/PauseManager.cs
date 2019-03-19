@@ -8,6 +8,7 @@ public class PauseManager : MonoBehaviour
 {
     CanvasGroup cg;
     public Button btnPause;
+    public Button btnQuit;
 
     void Start()
     {
@@ -18,10 +19,17 @@ public class PauseManager : MonoBehaviour
             cg.gameObject.AddComponent<CanvasGroup>();
         }
         cg.alpha = 0.0f;
+        cg.interactable = false;
 
         // link pause button to pause method
         if (btnPause)
             btnPause.onClick.AddListener(PauseGame);
+
+        if (btnQuit)
+        {
+            Time.timeScale = 1.0f;
+            btnQuit.onClick.AddListener(GameManager.instance.LoadMainMenu);
+        }
     }
 
     void Update()
@@ -38,11 +46,13 @@ public class PauseManager : MonoBehaviour
         if (cg.alpha == 0.0f)
         {
             cg.alpha = 1.0f;
+            cg.interactable = true;
             Time.timeScale = 0.0f;
         }
         else
         {
             cg.alpha = 0.0f;
+            cg.interactable = false;
             Time.timeScale = 1.0f;
         }
     }

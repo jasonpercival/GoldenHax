@@ -42,7 +42,7 @@ public class EnemyRanged : Enemy
         anim.SetFloat("Movement", Mathf.Abs(rb.velocity.x));
     }
 
-    public void Fire()
+    public override void Attack()
     {
         FaceTarget();
 
@@ -54,9 +54,6 @@ public class EnemyRanged : Enemy
         }
 
         Rigidbody projectileInstance = Instantiate(projectile, projectileSpawnPoint.position, rotation);
-
-        //// Stop 'Enemy' from hitting 'Projectile'
-        //Physics.IgnoreCollision(GetComponent<CapsuleCollider>(), projectileInstance.GetComponent<CapsuleCollider>(), true);
     }
 
     // Trigger attack when player enters collider range
@@ -71,7 +68,7 @@ public class EnemyRanged : Enemy
                 // fire the projectile if ready and player is alive
                 if (Time.time > timeSinceLastFire + attackRate)
                 {
-                    Fire();
+                    Attack();
                     timeSinceLastFire = Time.time;
                 }
             }

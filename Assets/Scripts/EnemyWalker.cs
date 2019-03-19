@@ -27,19 +27,24 @@ public class EnemyWalker : Enemy
         }
     }
 
+    public override void Attack()
+    {
+        FaceTarget();
+        isAttacking = true;
+        anim.SetTrigger("Attack");
+        rb.velocity = Vector3.zero;
+        anim.SetFloat("Movement", Mathf.Abs(rb.velocity.x));
+    }
+
     // Constantly attack player if they are within enemy collider
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Player") && !isAttacking)
         {
-            FaceTarget();
             Player player = other.GetComponent<Player>();
             if (!player.isDead)
             {
-                isAttacking = true;
-                anim.SetTrigger("Attack");
-                rb.velocity = Vector3.zero;
-                anim.SetFloat("Movement", Mathf.Abs(rb.velocity.x));
+                Attack();
             }
         }
     }

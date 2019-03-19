@@ -2,22 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour
 {
-    public int health;          // current health
-    public float speed;         // movement speed
-    public float attackRate;    // how fast can the enemy attack
+    public int health;                  // current health
+    public float speed;                 // movement speed
+    public float attackRate;            // how fast can the enemy attack
+    public GameObject damageEffect;     // particle system to use for hit/death
 
+    // component references
+    protected GameObject target;        // current target the enemy is attacking (if any)
+    protected Animator anim;
+    protected Rigidbody rb;
     protected SpriteRenderer sr;
+
+    // enemy state
     protected float timeSinceLastFire;
     protected bool isAttacking = false;
     protected bool isFacingRight = false;
 
-    protected Animator anim;
-    protected GameObject target = null;
-    protected Rigidbody rb;
+    // abstract methods that must be implemented
+    public abstract void Attack();
 
-    // Start is called before the first frame update
     public virtual void Start()
     {
         // set component references
@@ -66,6 +71,7 @@ public class Enemy : MonoBehaviour
 
     }
 
+    // flips the enemy sprite
     protected void Flip()
     {
         isFacingRight = !isFacingRight;
@@ -103,30 +109,21 @@ public class Enemy : MonoBehaviour
     public virtual void TakeDamage()
     {
         health--;
-        StartCoroutine(FlashSprite(Color.red));
         if (health <= 0)
         {
             health = 0;
             Death();
         }
-    }
 
-    // Make the player sprite flash temporarily with a given color
-    IEnumerator FlashSprite(Color color, float duration = 5.0f)
-    {
-        for (int i = 0; i < duration; i++)
+        if (damageEffect)
         {
-            sr.color = color;
-            yield return new WaitForSeconds(0.05f);
-            sr.color = Color.white;
-            yield return new WaitForSeconds(0.05f);
+            Instantiate(damageEffect, transform.position, Quaternion.identity);
         }
     }
 
+    // base class enemy death method (destroy self)
     public virtual void Death()
     {
-        Destroy(gameObject, 1.0f);
+        Destroy(gameObject);
     }
-
-
 }
