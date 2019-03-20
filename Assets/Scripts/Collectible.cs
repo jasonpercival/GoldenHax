@@ -29,9 +29,8 @@ public class Collectible : MonoBehaviour
                 // collect item particle visual effect
                 if (collectParticle)
                 {
-                    ParticleSystem temp = Instantiate(collectParticle, other.transform.position, Quaternion.identity);
-                    // destory object after length of partical system life
-                    Destroy(temp, collectParticle.main.duration);
+                    // note: particle system will destroy itself after it's play duration
+                    Instantiate(collectParticle, other.transform.position, Quaternion.identity);
                 }
             }
 
