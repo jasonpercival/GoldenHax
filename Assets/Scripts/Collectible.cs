@@ -10,15 +10,6 @@ public class Collectible : MonoBehaviour
     public AudioClip collectItemClip;
     public ParticleSystem collectParticle;
     
-    private void OnDestroy()
-    {
-        // Collect item sound effect
-        if (collectItemClip && GameManager.instance)
-        {
-            SoundManager.instance.PlaySound(collectItemClip);           
-        }
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         // Check for collisions only with player
@@ -42,6 +33,12 @@ public class Collectible : MonoBehaviour
                     // destory object after length of partical system life
                     Destroy(temp, collectParticle.main.duration);
                 }
+            }
+
+            // Collect item sound effect
+            if (collectItemClip && SoundManager.instance)
+            {
+                SoundManager.instance.PlaySound(collectItemClip);
             }
 
             // Remove the collectible from the scene

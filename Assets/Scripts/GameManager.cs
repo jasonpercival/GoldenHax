@@ -93,6 +93,8 @@ public class GameManager : MonoBehaviour
 
     public void LoadLevel(string levelName)
     {
+        SoundManager.instance.sfxSource.mute = true;
+
         switch (levelName)
         {
             case "MainMenu":
