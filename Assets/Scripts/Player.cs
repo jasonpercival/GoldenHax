@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     public float MaxPlayerX;            // player max X movement constraint
 
     // audio references
-    public AudioClip deathClip, damageClip, attackClip;
+    public AudioClip deathClip, damageClip, attackClip, jumpClip, gameOverMusic;
 
     // player state
     public bool isDead = false;
@@ -101,6 +101,7 @@ public class Player : MonoBehaviour
             // Jump allowed if grounded 
             if (Input.GetButtonDown("Jump"))
             {
+                SoundManager.Instance.PlaySound(jumpClip);
                 moveDirection.y = jumpSpeed;
                 moveDirection.z = 0.0f;         // only allow jumping straight up and down
             }
@@ -118,13 +119,13 @@ public class Player : MonoBehaviour
             moveDirection.y = moveDirection.y - (gravity * Time.deltaTime);
         }
 
-        if (Input.GetButtonDown("Fire1") && !isAttacking)
+        if (Input.GetButtonDown("Fire1") && !isAttacking && !isDead)
         {
             anim.SetTrigger("Attack");
             isAttacking = true;
             StartCoroutine(ResetAttack());
             // play sound
-            SoundManager.instance.PlaySound(attackClip);
+            SoundManager.Instance.PlaySound(attackClip);
         }
 
         // Flip the sprite if moving in different direction
@@ -233,7 +234,7 @@ public class Player : MonoBehaviour
         isFrozen = true;
         StartCoroutine(ResetFrozen(1.0f));
         anim.SetTrigger("Damage");
-        SoundManager.instance.PlaySound(damageClip);
+        SoundManager.Instance.PlaySound(damageClip);
 
         health--;
         if (health <= 0)
@@ -251,12 +252,12 @@ public class Player : MonoBehaviour
     public void Death()
     {
         // Play death sound clip
-        SoundManager.instance.PlaySound(deathClip);
+        SoundManager.Instance.PlaySound(deathClip);
 
         // Start death animation
         isDead = true;
         anim.SetBool("IsDead", isDead);
-        StartCoroutine(FlashSprite(Color.gray, 10.0f));
+        StartCoroutine(FlashSprite(Color.gray, 5.0f));
 
         lives--;
         if (lives > 0)
@@ -267,7 +268,8 @@ public class Player : MonoBehaviour
         else
         {
             // Game Over
-            GameManager.instance.GameOver();
+            SoundManager.Instance.PlayMusic(gameOverMusic, loop: false);
+            GameManager.Instance.GameOver();
         }
     }
 

@@ -4,28 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public enum GameState { NullState, MainMenu, Game };
+public enum GameState { NULLSTATE, GAME, MAIN_MENU }
+
+public delegate void OnStateChangeHandler();
+public delegate void OnEnemyKilledHandler();
 
 public class GameManager : MonoBehaviour
 {
     static GameManager _instance = null;
-    public static GameManager instance
-    {
-        get { return _instance; }
-        set { _instance = value; }
-    }
+    public GameState gameState { get; private set; }
 
-    private GameState _gs = GameState.NullState;
-
-    public GameState gs
-    {
-        get { return _gs; }
-        set
-        {
-            _gs = value;
-            Debug.Log("Current State: " + _gs);
-        }
-    }
+    public bool IsBattleLocked = false; 
+    public int killCount = 0;
 
     public GameObject playerPrefab;
     public GameObject player1 { get; set; }
@@ -34,19 +24,32 @@ public class GameManager : MonoBehaviour
     private const string MUSIC_VOLUME = "MusicVolume";
     private const string SOUND_VOLUME = "SoundVolume";
 
-    void Awake()
-    {
-        if (instance)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(this);
-        }
+    public event OnStateChangeHandler OnStateChange;
+    public event OnEnemyKilledHandler OnEnemyKilled;
 
-        gs = GameState.MainMenu;
+    public void SetGameState(GameState state)
+    {
+        gameState = state;
+        if (OnStateChange != null)
+            OnStateChange();
+    }
+
+
+    public static GameManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                GameObject go = new GameObject();
+                _instance = go.AddComponent<GameManager>();
+                _instance.playerPrefab = Resources.Load("Warrior", typeof(GameObject)) as GameObject;
+                go.name = "_GameManager";
+                DontDestroyOnLoad(_instance);
+            }
+
+            return _instance;
+        }
     }
 
     public void LoadPlayerPrefs()
@@ -54,30 +57,30 @@ public class GameManager : MonoBehaviour
         // music volume
         if (PlayerPrefs.HasKey(MUSIC_VOLUME))
         {
-            SoundManager.instance.musicSource.volume = PlayerPrefs.GetFloat(MUSIC_VOLUME);
+            SoundManager.Instance.musicSource.volume = PlayerPrefs.GetFloat(MUSIC_VOLUME);
         }
         else
         {
-            PlayerPrefs.SetFloat(MUSIC_VOLUME, SoundManager.instance.musicSource.volume);
+            PlayerPrefs.SetFloat(MUSIC_VOLUME, SoundManager.Instance.musicSource.volume);
             PlayerPrefs.Save();
         }
 
         // sound volume
         if (PlayerPrefs.HasKey(SOUND_VOLUME))
         {
-            SoundManager.instance.sfxSource.volume = PlayerPrefs.GetFloat(SOUND_VOLUME);
+            SoundManager.Instance.sfxSource.volume = PlayerPrefs.GetFloat(SOUND_VOLUME);
         }
         else
         {
-            PlayerPrefs.SetFloat(SOUND_VOLUME, SoundManager.instance.sfxSource.volume);
+            PlayerPrefs.SetFloat(SOUND_VOLUME, SoundManager.Instance.sfxSource.volume);
             PlayerPrefs.Save();
         }
     }
 
     public void SavePlayerPrefs()
     {
-        PlayerPrefs.SetFloat(MUSIC_VOLUME, SoundManager.instance.musicSource.volume);
-        PlayerPrefs.SetFloat(SOUND_VOLUME, SoundManager.instance.sfxSource.volume);
+        PlayerPrefs.SetFloat(MUSIC_VOLUME, SoundManager.Instance.musicSource.volume);
+        PlayerPrefs.SetFloat(SOUND_VOLUME, SoundManager.Instance.sfxSource.volume);
         PlayerPrefs.Save();
     }
 
@@ -96,16 +99,13 @@ public class GameManager : MonoBehaviour
         switch (levelName)
         {
             case "MainMenu":
-                gs = GameState.MainMenu;
-                SoundManager.instance.PlayMusic(SoundManager.instance.titleScreen);
+                SetGameState(GameState.MAIN_MENU);
                 break;
             case "Level1":
-                gs = GameState.Game;
-                SoundManager.instance.PlayMusic(SoundManager.instance.stage1);
+                SetGameState(GameState.GAME);
                 break;
             default:
-                gs = GameState.NullState;
-                SoundManager.instance.PlayMusic(null);
+                SetGameState(GameState.NULLSTATE);
                 break;
         }
 
@@ -122,7 +122,41 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        SoundManager.instance.PlayMusic(SoundManager.instance.gameOver, loop: false);
         Invoke("LoadMainMenu", 5);
     }
+
+    // Locks the camera and player movement within the camera's view during battle
+    public void LockBattle()
+    {
+        CameraFollow cameraFollow = Camera.main.GetComponent<CameraFollow>();
+        cameraFollow.isTracking = false;
+
+        float horizontalExtent = Camera.main.orthographicSize * Screen.width / Screen.height;
+  
+        // lock the player to the current camera position until fight is over
+        Player player = player1.GetComponent<Player>();
+        player.MinPlayerX = Camera.main.transform.position.x - horizontalExtent;
+        player.MaxPlayerX = Camera.main.transform.position.x + horizontalExtent;
+    }
+
+    public void UpdateKills()
+    {
+        killCount++;
+        if (OnEnemyKilled != null)
+        {
+            OnEnemyKilled();
+        }
+    }
+
+    // Unlocks the player after a battle to move freely again
+    public void UnlockBattle()
+    {
+        Player player = player1.GetComponent<Player>();
+        player.MaxPlayerX = 38.0f;
+        CameraFollow cameraFollow = Camera.main.GetComponent<CameraFollow>();
+        cameraFollow.isTracking = true;
+    }
+
 }
+
+

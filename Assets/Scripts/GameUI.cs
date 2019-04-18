@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,15 +9,39 @@ public class GameUI : MonoBehaviour
     public GameObject[] player1_HealthBars;
     public Text player1Lives;
     public Text gameOver;
+    public Animator goAnimator;
+    public AudioClip goIndicator;
 
     Player player1;
 
     private void Start()
     {
-        player1 = GameManager.instance.player1.GetComponent<Player>();
+        player1 = GameManager.Instance.player1.GetComponent<Player>();
         if (!player1)
         {
             Debug.LogError("Unable to get reference to player 1 in " + name);
+        }
+
+        if (!goAnimator)
+        {
+            Debug.LogError("Unable to get reference to animator component.");
+        }
+  
+    }
+
+    public void ShowGoIndicator()
+    {
+        goAnimator.SetTrigger("Indicator");
+        StartCoroutine(GoIndicator());
+    }
+
+    // Make the player sprite flash temporarily with a given color
+    IEnumerator GoIndicator()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            SoundManager.Instance.PlaySound(goIndicator);
+            yield return new WaitForSeconds(goIndicator.length);
         }
     }
 

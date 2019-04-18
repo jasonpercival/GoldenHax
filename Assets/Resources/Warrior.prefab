@@ -198,12 +198,14 @@ MonoBehaviour:
   deathClip: {fileID: 8300000, guid: fe58c53008d44fd4299c5f16d949113c, type: 3}
   damageClip: {fileID: 8300000, guid: 29213739de96a9741b397ccd73c0523f, type: 3}
   attackClip: {fileID: 8300000, guid: 7ae192f41792d404796ee61ef35bb9a8, type: 3}
+  jumpClip: {fileID: 8300000, guid: d97869b0bf1af86418aee3c73d49bd8d, type: 3}
+  gameOverMusic: {fileID: 8300000, guid: 7acde866d818bff4eae119b82bf03956, type: 3}
   isDead: 0
   lives: 2
   healthMax: 6
   health: 6
   potionsMax: 6
-  potions: 1
+  potions: 0
 --- !u!143 &2185820795807349995
 CharacterController:
   m_ObjectHideFlags: 0

@@ -11,9 +11,9 @@ public class Stage1 : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            if (SoundManager.instance)
+            if (SoundManager.Instance)
             {
-                SoundManager.instance.PlayMusic(bossMusic);
+                SoundManager.Instance.PlayMusic(bossMusic);
             }
         }
     }

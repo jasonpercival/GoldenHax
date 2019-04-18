@@ -11,19 +11,30 @@ public class EnemyWalker : Enemy
 
     void Update()
     {
-        if (!isAttacking)
+        if (!isAttacking && target)
         {
-            // Move in the direction the enemy is facing
-            if (isFacingRight)
+
+            Player player = target.GetComponent<Player>();
+
+            FaceTarget();
+            if (!player.isDead)
             {
-                rb.velocity = new Vector3(speed, 0, 0);
+                Vector3 pos = Vector3.MoveTowards(rb.position, target.transform.position, speed * Time.deltaTime);
+                rb.position = pos;
+
+                if (rb.position != target.transform.position)
+                {
+                    anim.SetFloat("Movement", 1.0f);
+                }
+                else
+                {
+                    anim.SetFloat("Movement", 0.0f);
+                }
             }
             else
             {
-                rb.velocity = new Vector3(-speed, 0, 0);
+                anim.SetFloat("Movement", 0.0f);
             }
-
-            anim.SetFloat("Movement", Mathf.Abs(rb.velocity.x));
         }
     }
 

@@ -35,9 +35,9 @@ public class Collectible : MonoBehaviour
             }
 
             // Collect item sound effect
-            if (collectItemClip && SoundManager.instance)
+            if (collectItemClip)
             {
-                SoundManager.instance.PlaySound(collectItemClip);
+                SoundManager.Instance.PlaySound(collectItemClip);
             }
 
             // Remove the collectible from the scene

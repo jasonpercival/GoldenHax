@@ -64,7 +64,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1565274083070539694
 Transform:
   m_ObjectHideFlags: 0
@@ -190,7 +190,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 2
-  speed: 2
+  speed: 1.5
   attackRate: 2
   damageEffect: {fileID: 6049880245554935337, guid: 6a23106190d80ec42bc06f00047a3438,
     type: 3}
+  enemyDeathClip: {fileID: 8300000, guid: 25f8ecf340413b448bc2b348a55ad3ed, type: 3}
+  enemyHitClip: {fileID: 8300000, guid: fb276fa4aa2ed0d40b77bca27d855bca, type: 3}

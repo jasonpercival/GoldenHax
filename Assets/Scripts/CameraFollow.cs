@@ -11,18 +11,25 @@ public class CameraFollow : MonoBehaviour
 
     float xMin, xMax, yMin, yMax;
 
+    public bool isTracking;
+
+    public float smoothTime = 0.4f;
+    private Vector3 velocity = Vector3.zero;
+
+
     void Start()
     {
-   
+
         // Find 'Player' in scene
-        GameObject go = GameObject.FindWithTag("Player");
-        if (!go)
+        GameObject player = GameManager.Instance.player1;
+        if (!player)
         {
             Debug.Log("Player not found.");
             return;
         }
 
-        target = go.GetComponent<Transform>();
+        target = player.GetComponent<Transform>();
+        isTracking = true;
 
         // Uses GameObjecs to set the min and max values for the camera movement
         xMin = camBoundMin.position.x;
@@ -35,12 +42,11 @@ public class CameraFollow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (target)
+        if (target && isTracking)
         {
-            transform.position = new Vector3(
-                Mathf.Clamp(target.position.x, xMin, xMax),
-                Mathf.Clamp(target.position.y, yMin, yMax),
-                transform.position.z);
+
+            Vector3 targetPos = new Vector3(Mathf.Clamp(target.position.x, xMin, xMax), Mathf.Clamp(target.position.y, yMin, yMax), transform.position.z);
+            transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref velocity, smoothTime);
         }
     }
 }

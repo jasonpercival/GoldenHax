@@ -9,6 +9,8 @@ public class PauseManager : MonoBehaviour
     CanvasGroup cg;
     public Button btnPause;
     public Button btnQuit;
+    public Button btnOptions;
+    public GameObject optionsMenu;
 
     void Start()
     {
@@ -25,10 +27,13 @@ public class PauseManager : MonoBehaviour
         if (btnPause)
             btnPause.onClick.AddListener(PauseGame);
 
+        if (btnOptions)
+            btnOptions.onClick.AddListener(ShowOptions);
+
         if (btnQuit)
         {
             Time.timeScale = 1.0f;
-            btnQuit.onClick.AddListener(GameManager.instance.LoadMainMenu);
+            btnQuit.onClick.AddListener(GameManager.Instance.LoadMainMenu);
         }
     }
 
@@ -54,6 +59,14 @@ public class PauseManager : MonoBehaviour
             cg.alpha = 0.0f;
             cg.interactable = false;
             Time.timeScale = 1.0f;
+        }
+    }
+
+    void ShowOptions()
+    {
+        if (optionsMenu)
+        {
+            Instantiate(optionsMenu);
         }
     }
 }

@@ -8,6 +8,8 @@ public abstract class Enemy : MonoBehaviour
     public float speed;                 // movement speed
     public float attackRate;            // how fast can the enemy attack
     public GameObject damageEffect;     // particle system to use for hit/death
+    public AudioClip enemyDeathClip;
+    public AudioClip enemyHitClip;
 
     // component references
     protected GameObject target;        // current target the enemy is attacking (if any)
@@ -48,12 +50,6 @@ public abstract class Enemy : MonoBehaviour
         if (health <= 0)
         {
             Debug.Log("Assign health for enemy " + name);
-        }
-
-        if (speed <= 0)
-        {
-            speed = 1.0f;
-            Debug.Log("Speed value not set in inspector for " + name);
         }
 
         if (attackRate <= 0)
@@ -115,6 +111,8 @@ public abstract class Enemy : MonoBehaviour
             Death();
         }
 
+        SoundManager.Instance.PlaySound(enemyHitClip);
+
         if (damageEffect)
         {
             Instantiate(damageEffect, transform.position, Quaternion.identity);
@@ -124,6 +122,8 @@ public abstract class Enemy : MonoBehaviour
     // base class enemy death method (destroy self)
     public virtual void Death()
     {
+        GameManager.Instance.UpdateKills();
+        SoundManager.Instance.PlaySound(enemyDeathClip);
         Destroy(gameObject);
     }
 }

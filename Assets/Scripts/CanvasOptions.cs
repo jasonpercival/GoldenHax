@@ -14,15 +14,15 @@ public class CanvasOptions : MonoBehaviour
 
     void Start()
     {
-        if (!GameManager.instance)
+        if (!GameManager.Instance)
         {
             Debug.LogError("Unable to get reference to game manager instance.");
         }
 
         // get the current settings
-        GameManager.instance.LoadPlayerPrefs();
-        sfxVolume.value = SoundManager.instance.sfxSource.volume;
-        musicVolume.value = SoundManager.instance.musicSource.volume;
+        GameManager.Instance.LoadPlayerPrefs();
+        sfxVolume.value = SoundManager.Instance.sfxSource.volume;
+        musicVolume.value = SoundManager.Instance.musicSource.volume;
 
         // add listeners to capture volume slider changes and button clicks
         musicVolume.onValueChanged.AddListener(MusicVolumeChanged);
@@ -33,30 +33,30 @@ public class CanvasOptions : MonoBehaviour
 
     internal void PlayTestSound()
     {
-        SoundManager.instance.PlaySound(volumeTestClip);
+        SoundManager.Instance.PlaySound(volumeTestClip);
     }
 
     private void MusicVolumeChanged(float volume)
     {
-        SoundManager.instance.SetMusicVolume(volume);
+        SoundManager.Instance.SetMusicVolume(volume);
     }
 
     private void SoundVolumeChanged(float volume)
     {
-        SoundManager.instance.SetSoundVolume(volume);
+        SoundManager.Instance.SetSoundVolume(volume);
     }
 
     private void Save()
     {
         // update player prefs with new settings
-        GameManager.instance.SavePlayerPrefs();
+        GameManager.Instance.SavePlayerPrefs();
         Destroy(gameObject);
     }
 
     private void Cancel()
     {
         // restore original settings
-        GameManager.instance.LoadPlayerPrefs();
+        GameManager.Instance.LoadPlayerPrefs();
         Destroy(gameObject);
     }
 }

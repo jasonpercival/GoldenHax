@@ -8,33 +8,26 @@ public class SoundManager : MonoBehaviour
     public AudioSource musicSource;
     public AudioSource sfxSource;
 
-    [Header("Audio")]
-    public AudioClip titleScreen;
-    public AudioClip stage1;
-    public AudioClip gameOver;
-
     static SoundManager _instance = null;
 
-    public static SoundManager instance
+    public static SoundManager Instance
     {
-        get { return _instance; }
-        set { _instance = value; }
-    }
+        get
+        {
+            if (_instance == null)
+            {
+                GameObject go = new GameObject();
+                _instance = go.AddComponent<SoundManager>();
+                go.name = "_SoundManager";
+                DontDestroyOnLoad(_instance);
+                GameManager.Instance.LoadPlayerPrefs();
+            }
 
+            return _instance;
+        }
+    }
+    
     void Awake()
-    {
-        if (instance)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(this);
-        }
-    }
-
-    void Start()
     {
         // initialize audio sources
         musicSource = gameObject.AddComponent<AudioSource>();
@@ -54,9 +47,6 @@ public class SoundManager : MonoBehaviour
             sfxSource.loop = false;
             sfxSource.volume = 1.0f;
         }
-
-        GameManager.instance.LoadPlayerPrefs();
-        PlayMusic(titleScreen);
     }
 
     public void PlayMusic(AudioClip audioClip, bool loop = true)
@@ -71,6 +61,10 @@ public class SoundManager : MonoBehaviour
                 musicSource.clip = audioClip;
                 musicSource.loop = loop;
                 musicSource.Play();
+            }
+            else
+            {
+                Debug.LogError("Audio clip is missing.");
             }
         }
     }
@@ -92,7 +86,5 @@ public class SoundManager : MonoBehaviour
     {
         sfxSource.volume = volume;
     }
-
-
 
 }

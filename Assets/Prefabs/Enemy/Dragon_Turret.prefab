@@ -181,6 +181,8 @@ MonoBehaviour:
   attackRate: 1.5
   damageEffect: {fileID: 6049880245554935337, guid: 6a23106190d80ec42bc06f00047a3438,
     type: 3}
+  enemyDeathClip: {fileID: 8300000, guid: 01ffefecd5f53654eadfb2ca8576b881, type: 3}
+  enemyHitClip: {fileID: 8300000, guid: ba5aa6222b13c3a49bda68dd071562b3, type: 3}
   projectile: {fileID: 670669866748747952, guid: 3b1fc66e4a7aee94fa808b124a660a60,
     type: 3}
   projectileSpawnPoint: {fileID: 393054445}

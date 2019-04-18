@@ -8,14 +8,15 @@ public class CanvasMainMenu : MonoBehaviour
     public Button btnStart;
     public Button btnOptions;
     public GameObject optionsMenu;
+    public AudioClip titleMusic;
 
     void Start()
     {
-        if (GameManager.instance)
-        {
-            btnStart.onClick.AddListener(GameManager.instance.StartGame);
-            btnOptions.onClick.AddListener(ShowOptions);
-        }
+
+        btnStart.onClick.AddListener(GameManager.Instance.StartGame);
+        btnOptions.onClick.AddListener(ShowOptions);
+        GameManager.Instance.SetGameState(GameState.MAIN_MENU);
+        SoundManager.Instance.PlayMusic(titleMusic);
     }
 
     void ShowOptions()
