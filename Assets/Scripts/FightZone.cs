@@ -47,17 +47,15 @@ public class FightZone : MonoBehaviour
 
     private void Instance_OnEnemyKilled()
     {
+        Debug.Log("Enemy killed. Kill count = " + GameManager.Instance.killCount);
         if (GameManager.Instance.killCount >= enemyCounter)
         {
             GameManager.Instance.OnEnemyKilled -= Instance_OnEnemyKilled;
             GameManager.Instance.UnlockBattle();
 
             gameObject.SetActive(false);
+
             HUD.ShowGoIndicator();
         }
     }
-
-
-
-
 }

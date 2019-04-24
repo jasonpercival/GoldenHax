@@ -86,6 +86,8 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        killCount = 0;
+        IsBattleLocked = false;
         LoadLevel("Level1");
     }
 
@@ -121,6 +123,11 @@ public class GameManager : MonoBehaviour
     }
 
     public void GameOver()
+    {
+        Invoke("LoadMainMenu", 5);
+    }
+
+    public void StageClear()
     {
         Invoke("LoadMainMenu", 5);
     }

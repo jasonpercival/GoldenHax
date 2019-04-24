@@ -1,0 +1,223 @@
+fileFormatVersion: 2
+guid: 116cf944e6147624fa1751339c4826b6
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Storchinaya_0
+    21300002: Storchinaya_1
+    21300004: Storchinaya_2
+    21300006: Storchinaya_3
+    21300008: Storchinaya_4
+    21300010: Storchinaya_5
+    21300012: Storchinaya_6
+    21300014: Storchinaya_7
+    21300016: Storchinaya_8
+    21300018: Storchinaya_9
+    21300020: Storchinaya_10
+    21300022: Storchinaya_11
+    21300024: Storchinaya_12
+    21300026: Storchinaya_13
+    21300028: Storchinaya_14
+    21300030: Storchinaya_15
+    21300032: Storchinaya_Ride1
+    21300034: Storchinaya_Ride2
+    21300036: Storchinaya_Ride3
+    21300038: Storchinaya_19
+    21300040: Storchinaya_20
+    21300042: Storchinaya_21
+    21300044: Storchinaya_22
+    21300046: Storchinaya_23
+    21300048: Storchinaya_24
+    21300050: Storchinaya_25
+    21300052: Storchinaya_26
+    21300054: Storchinaya_27
+    21300056: Storchinaya_28
+    21300058: Storchinaya_29
+    21300060: Storchinaya_30
+    21300062: Storchinaya_31
+    21300064: Storchinaya_32
+    21300066: Storchinaya_33
+    21300068: Storchinaya_34
+    21300070: Storchinaya_35
+    21300072: Storchinaya_36
+    21300074: Storchinaya_37
+    21300076: Storchinaya_38
+    21300078: Storchinaya_39
+    21300080: Storchinaya_40
+    21300082: Storchinaya_41
+    21300084: Storchinaya_42
+    21300086: Storchinaya_43
+    21300088: Storchinaya_44
+    21300090: Storchinaya_45
+    21300092: Storchinaya_46
+    21300094: Storchinaya_47
+    21300096: Storchinaya_48
+    21300098: Storchinaya_49
+    21300100: Storchinaya_50
+    21300102: Storchinaya_51
+    21300104: Storchinaya_52
+    21300106: Storchinaya_53
+    21300108: Storchinaya_54
+    21300110: Storchinaya_55
+    21300112: Storchinaya_56
+    21300114: Storchinaya_57
+    21300116: Storchinaya_58
+    21300118: Storchinaya_59
+    21300120: Storchinaya_60
+    21300122: Storchinaya_61
+    21300124: Storchinaya_62
+    21300126: Storchinaya_63
+  externalObjects: {}
+  serializedVersion: 9
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 21
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Storchinaya_Ride1
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 160
+        width: 35
+        height: 54
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63a3587587f385447839f208371895c7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Storchinaya_Ride2
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 161
+        width: 28
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d01c70f523e66240af3b04124640143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Storchinaya_Ride3
+      rect:
+        serializedVersion: 2
+        x: 446
+        y: 162
+        width: 30
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15ea95aed4428ad43b0d0c4b57755006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 56f4420179109c243a2b9d8813c9bcee
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

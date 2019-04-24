@@ -46,11 +46,13 @@ TextureImporter:
     21300082: Longmoan_17
     21300084: Longmoan_18
     21300086: Longmoan_19
-    21300088: Longmoan_20
+    21300088: Longmoan_Hit1
     21300090: Longmoan_21
     21300092: Longmoan_22
     21300094: Longmoan_23
     21300096: Longmoan_24
+    21300098: Longmoan_Hit2
+    21300100: Longmoan_Hit3
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -566,15 +568,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Longmoan_20
+      name: Longmoan_Hit1
       rect:
         serializedVersion: 2
         x: 64
         y: 156
         width: 40
-        height: 62
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        height: 67
+      alignment: 9
+      pivot: {x: 0.5128555, y: 0.5383754}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -586,7 +588,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Longmoan_21
+      name: Longmoan_Hit2
       rect:
         serializedVersion: 2
         x: 111
@@ -606,7 +608,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Longmoan_22
+      name: Longmoan_Hit3
       rect:
         serializedVersion: 2
         x: 157

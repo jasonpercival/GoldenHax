@@ -92,8 +92,17 @@ public class EnemyWalker : Enemy
         if (target)
         {
             Player player = target.GetComponent<Player>();
-            player.TakeDamage();
+            if (!player.isDead)
+            {
+                player.TakeDamage();
+            }
         }
+    }
+
+    public override void TakeDamage()
+    {
+        base.TakeDamage();
+        anim.SetTrigger("Hit");
     }
 
 }

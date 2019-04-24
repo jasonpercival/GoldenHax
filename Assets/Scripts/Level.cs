@@ -6,6 +6,7 @@ public class Level : MonoBehaviour
 {
     public Transform spawnLocation;
     public AudioClip backgroundMusic;
+    public AudioClip stageClearMusic;
 
     void Start()
     {

@@ -9,8 +9,12 @@ public class GameUI : MonoBehaviour
     public GameObject[] player1_HealthBars;
     public Text player1Lives;
     public Text gameOver;
+    public Text stageClear;
     public Animator goAnimator;
     public AudioClip goIndicator;
+    public FightZone endZone;
+
+    private bool zoneActive;
 
     Player player1;
 
@@ -26,7 +30,7 @@ public class GameUI : MonoBehaviour
         {
             Debug.LogError("Unable to get reference to animator component.");
         }
-  
+        zoneActive = true;
     }
 
     public void ShowGoIndicator()
@@ -61,6 +65,31 @@ public class GameUI : MonoBehaviour
         for (int i = 0; i < player1_HealthBars.Length; i++)
         {
             player1_HealthBars[i].SetActive(i < numberOfBars);
+        }
+
+        // check for stage clear
+        if (zoneActive)
+        {
+            bool enemyAlive = false;
+            foreach (var enemy in endZone.enemiesToActivate)
+            {
+                if (enemy)
+                {
+                    enemyAlive = true;
+                    break;
+                }
+            }
+
+            if (!enemyAlive)
+            {
+                stageClear.enabled = true;
+                zoneActive = false;
+
+                // restart
+                var level = GameObject.Find("Level1").GetComponent<Level>();
+                SoundManager.Instance.PlayMusic(level.stageClearMusic, loop: false);
+                GameManager.Instance.StageClear();
+            }
         }
     }
 }

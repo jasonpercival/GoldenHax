@@ -19,6 +19,14 @@ public class CanvasMainMenu : MonoBehaviour
         SoundManager.Instance.PlayMusic(titleMusic);
     }
 
+    void Update()
+    {
+        if (Input.GetButtonDown("Start"))
+        {
+            GameManager.Instance.StartGame();
+        }    
+    }
+
     void ShowOptions()
     {
         if (optionsMenu)

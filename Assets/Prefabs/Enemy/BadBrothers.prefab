@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1867783763230026340}
   - component: {fileID: 3151762803780808548}
   - component: {fileID: 1352761261310286303}
-  - component: {fileID: 6568108339465964331}
+  - component: {fileID: 7424349270501888062}
   m_Layer: 12
   m_Name: BadBrothers
   m_TagString: Enemy
@@ -31,7 +31,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 34.729973, y: -9.2883, z: 0.056640625}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 3243212281551069413}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 534bc8eca9171874481618123326ed02, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1.9047619, y: 4.5238094}
@@ -96,10 +97,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 4
-  speed: 0
+  speed: 1
   attackRate: 1
-  damageEffect: {fileID: 6049880245554935337, guid: 6a23106190d80ec42bc06f00047a3438,
-    type: 3}
+  damageEffect: {fileID: 0}
   enemyDeathClip: {fileID: 8300000, guid: 01ffefecd5f53654eadfb2ca8576b881, type: 3}
   enemyHitClip: {fileID: 8300000, guid: ba5aa6222b13c3a49bda68dd071562b3, type: 3}
 --- !u!95 &3151762803780808548
@@ -137,7 +137,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!136 &6568108339465964331
+--- !u!136 &7424349270501888062
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -150,4 +150,48 @@ CapsuleCollider:
   m_Radius: 0.95238096
   m_Height: 4.5238094
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 2.2619047, z: 0}
+--- !u!1 &7691412237408146055
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3243212281551069413}
+  - component: {fileID: 3353696870751045123}
+  m_Layer: 0
+  m_Name: Hitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3243212281551069413
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7691412237408146055}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3151762803780808546}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3353696870751045123
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7691412237408146055}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.367115, y: 3.2926383, z: 0.6924733}
+  m_Center: {x: 0.01124382, y: 1.5861709, z: -0.024744093}

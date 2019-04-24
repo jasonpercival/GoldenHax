@@ -10,16 +10,17 @@ GameObject:
   m_Component:
   - component: {fileID: 6041301656161043760}
   - component: {fileID: 6041301656161043767}
-  - component: {fileID: 3820873657175844445}
   - component: {fileID: 1228833480}
-  - component: {fileID: 1228833479}
+  - component: {fileID: 8699204154373196360}
+  - component: {fileID: 2779841698342029756}
+  - component: {fileID: 7144506271004674390}
   m_Layer: 12
   m_Name: Elf_Magic
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6041301656161043760
 Transform:
   m_ObjectHideFlags: 0
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300008, guid: 8a7fbe7b6eb85ea4a8a6010fba454e7d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 2, y: 2}
@@ -82,24 +83,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3820873657175844445
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6041301656161043766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdc6b61b149445d48a5f0b705d46b471, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 2
-  speed: 4
-  attackRate: 0
-  damageEffect: {fileID: 0}
-  enemyDeathClip: {fileID: 0}
-  enemyHitClip: {fileID: 8300000, guid: dc79a7b907cfcf541b2c103d1e592b3f, type: 3}
 --- !u!54 &1228833480
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -116,7 +99,46 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!136 &1228833479
+--- !u!95 &8699204154373196360
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6041301656161043766}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8dfceedc9c4fc364a83217338ce8cc17, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2779841698342029756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6041301656161043766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5932dc827fc44cf4ea6426674100e94f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 2
+  speed: 8
+  attackRate: 0.5
+  damageEffect: {fileID: 0}
+  enemyDeathClip: {fileID: 0}
+  enemyHitClip: {fileID: 8300000, guid: fe3617442fd0b654590ae15e4d559a22, type: 3}
+  collectibleToDrop: {fileID: 2561549382386801632, guid: bc459b6df2c01eb488d2bec7a127fd8e,
+    type: 3}
+--- !u!136 &7144506271004674390
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,7 +148,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.7619048
-  m_Height: 1.5238096
+  m_Radius: 1.01
+  m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: -0.7619048, z: 0}
+  m_Center: {x: 0, y: -0.6, z: 0}

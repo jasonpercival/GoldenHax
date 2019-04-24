@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 2484973021776519343}
   - component: {fileID: 7219324028483789190}
   - component: {fileID: 844109029}
-  m_Layer: 0
+  - component: {fileID: 6702701124183468501}
+  - component: {fileID: 1901132316}
+  m_Layer: 18
   m_Name: Potion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,6 +98,8 @@ MonoBehaviour:
   healthBonus: 0
   potionBonus: 1
   collectItemClip: {fileID: 8300000, guid: 1a15973a4f73d6947a9a0ca87599b254, type: 3}
+  collectParticle: {fileID: 567362154724190733, guid: 9407cfba5017c544b94afa1f5a3505f5,
+    type: 3}
 --- !u!65 &844109029
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -109,3 +113,32 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.61904764, y: 0.7619048, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &6702701124183468501
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2484973021776519341}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.17044258, y: 0.46979284, z: 0.054819793}
+  m_Center: {x: 0.0029268265, y: -0.14605594, z: 0.015055373}
+--- !u!54 &1901132316
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2484973021776519341}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
